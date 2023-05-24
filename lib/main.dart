@@ -15,9 +15,27 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false, // Removendo o banner de debug
         home: Scaffold(
+          backgroundColor: Color.fromARGB(229, 230, 219, 219),
           appBar: AppBar(title: NewAppBar()),
-          body: const Text("teste"),
-          bottomNavigationBar: NewNavBar(),
+          body: Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                color: Colors
+                    .white, // Cor de fundo do Container definida como branco
+                borderRadius: BorderRadius.circular(
+                    10.0), // Valor de raio para deixar a borda arredondada
+              ),
+              child: Center(
+                child: Text(
+                  'Conteúdo do meu aplicativo',
+                  style: TextStyle(fontSize: 24),
+                ),
+              ),
+            ),
+          ),
+          bottomNavigationBar: Text("teste"),
         ));
   }
 }

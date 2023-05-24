@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: Text("teste"),
+          bottomNavigationBar: NewNavBar(),
         ));
   }
 }
@@ -60,8 +60,29 @@ class NewAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        title: Center(
+        title: const Center(
       child: Text("Previsão do Tempo Agora"),
     ));
+  }
+}
+
+class NewNavBar extends StatelessWidget {
+  NewNavBar();
+
+  void tocaramNoBotao(int index) {
+    print("Tocaram no botão $index");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      onTap: tocaramNoBotao,
+      items: const [
+        BottomNavigationBarItem(label: "Info", icon: Icon(Icons.info_outline)),
+        BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
+        BottomNavigationBarItem(
+            label: "Previsão detalhada", icon: Icon(Icons.more))
+      ],
+    );
   }
 }

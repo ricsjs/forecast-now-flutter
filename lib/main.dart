@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          primarySwatch: Colors.teal,
+          primarySwatch: Colors.indigo,
         ),
         debugShowCheckedModeBanner: false, // Removendo o banner de debug
         home: Scaffold(
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    'Confira a Previsão do Tempo',
+                    'Confira a previsão do tempo da sua cidade',
                     style: TextStyle(fontSize: 24),
                   ),
                   Padding(
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                         horizontal: 20.0), // Adicionando margem nas laterais
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Digite algo...',
+                        hintText: 'Digite uma cidade...',
                         icon: Icon(Icons.search),
                       ),
                     ),
@@ -61,7 +61,7 @@ class NewAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
         title: const Center(
-      child: Text("Previsão do Tempo Agora"),
+      child: Text("Forecast Now"),
     ));
   }
 }

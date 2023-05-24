@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false, // Removendo o banner de debug
         home: Scaffold(
           appBar: AppBar(title: NewAppBar()),
-          body: Text("teste"),
-          bottomNavigationBar: Text("teste"),
+          body: const Text("teste"),
+          bottomNavigationBar: NewNavBar(),
         ));
   }
 }
@@ -28,9 +28,36 @@ class NewAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        title: Center(
+        title: const Center(
       child: Text("Previsão do Tempo Agora"),
     ));
+  }
+}
+
+class NewNavBar extends StatelessWidget {
+  NewNavBar();
+
+  void tocaramNoBotao(int index){
+    print("Tocaram no botão $index");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return BottomNavigationBar(onTap: tocaramNoBotao, items: const [
+        BottomNavigationBarItem(
+          label: "Info",
+          icon: Icon(Icons.info_outline)
+        ),
+        BottomNavigationBarItem(
+          label: "Home",
+          icon: Icon(Icons.home)),
+        BottomNavigationBarItem(
+          label: "Previsão detalhada",
+          icon: Icon(Icons.more)
+        )
+        ],
+    );
   }
 }
 
@@ -50,10 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
+          children: <Widget>[
             Text(
               'Forecast Now',
             ),

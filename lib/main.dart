@@ -27,11 +27,25 @@ class MyApp extends StatelessWidget {
                 borderRadius: BorderRadius.circular(
                     10.0), // Valor de raio para deixar a borda arredondada
               ),
-              child: Center(
-                child: Text(
-                  'Conteúdo do meu aplicativo',
-                  style: TextStyle(fontSize: 24),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    'Confira a Previsão do Tempo',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 20.0,
+                        horizontal: 20.0), // Adicionando margem nas laterais
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Digite algo...',
+                        icon: Icon(Icons.search),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

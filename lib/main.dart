@@ -27,15 +27,29 @@ class MyApp extends StatelessWidget {
                 borderRadius: BorderRadius.circular(
                     10.0), // Valor de raio para deixar a borda arredondada
               ),
-              child: Center(
-                child: Text(
-                  'Conteúdo do meu aplicativo',
-                  style: TextStyle(fontSize: 24),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    'Confira a Previsão do Tempo',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 20.0,
+                        horizontal: 20.0), // Adicionando margem nas laterais
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Digite algo...',
+                        icon: Icon(Icons.search),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          bottomNavigationBar: Text("teste"),
+          bottomNavigationBar: NewNavBar(),
         ));
   }
 }
@@ -55,56 +69,20 @@ class NewAppBar extends StatelessWidget {
 class NewNavBar extends StatelessWidget {
   NewNavBar();
 
-  void tocaramNoBotao(int index){
+  void tocaramNoBotao(int index) {
     print("Tocaram no botão $index");
   }
 
   @override
   Widget build(BuildContext context) {
-
-    return BottomNavigationBar(onTap: tocaramNoBotao, items: const [
+    return BottomNavigationBar(
+      onTap: tocaramNoBotao,
+      items: const [
+        BottomNavigationBarItem(label: "Info", icon: Icon(Icons.info_outline)),
+        BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
         BottomNavigationBarItem(
-          label: "Info",
-          icon: Icon(Icons.info_outline)
-        ),
-        BottomNavigationBarItem(
-          label: "Home",
-          icon: Icon(Icons.home)),
-        BottomNavigationBarItem(
-          label: "Previsão detalhada",
-          icon: Icon(Icons.more)
-        )
-        ],
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Forecast Now',
-            ),
-          ],
-        ),
-      ),
+            label: "Previsão detalhada", icon: Icon(Icons.more))
+      ],
     );
   }
 }

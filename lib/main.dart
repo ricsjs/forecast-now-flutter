@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
                 borderRadius: BorderRadius.circular(
                     10.0), // Valor de raio para deixar a borda arredondada
               ),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:  [
+                children: const [
                   Text(
                     'Confira a Previsão do Tempo',
                     style: TextStyle(fontSize: 24),

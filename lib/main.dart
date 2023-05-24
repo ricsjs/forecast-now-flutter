@@ -10,13 +10,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false, // Removendo o banner de debug
-      home: const MyHomePage(title: 'Forecast Now App'),
-    );
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+        ),
+        debugShowCheckedModeBanner: false, // Removendo o banner de debug
+        home: Scaffold(
+          appBar: AppBar(title: NewAppBar()),
+          body: Text("teste"),
+          bottomNavigationBar: Text("teste"),
+        ));
+  }
+}
+
+class NewAppBar extends StatelessWidget {
+  NewAppBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+        title: Center(
+      child: Text("Previsão do Tempo Agora"),
+    ));
   }
 }
 
@@ -39,8 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
+          children: const <Widget>[
+            Text(
               'Forecast Now',
             ),
           ],

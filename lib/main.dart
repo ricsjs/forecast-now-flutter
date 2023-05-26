@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(229, 230, 219, 219),
           appBar: AppBar(title: NewAppBar()),
           body: Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: EdgeInsets.all(20.0),
             child: Container(
-              height: 200,
+              height: 300,
               decoration: BoxDecoration(
                 color: Colors
                     .white, // Cor de fundo do Container definida como branco
@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
-                    'Confira a previsão do tempo da sua cidade',
+                    'Confira a Previsão do Tempo',
                     style: TextStyle(fontSize: 24),
                   ),
                   Padding(
@@ -46,6 +46,39 @@ class MyApp extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/01d.png'),
+                      Text('BR, Caicó, 32.24ºC, céu limpo',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'A sensação térmica em Caicó é de 32.82ºC',
+                        style: TextStyle(fontSize: 16),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.water_drop,
+                        size: 24,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        'Humidity 41% | Probabilidade média de chuva',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

@@ -88,7 +88,7 @@ class NewNavBar extends HookWidget {
         BottomNavigationBarItem(label: "Info", icon: Icon(Icons.info_outline)),
         BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
         BottomNavigationBarItem(
-            label: "Previsão detalhada", icon: Icon(Icons.more))
+            label: "Previsão detalhada", icon: Icon(Icons.filter_drama ))
       ],
     );
   }

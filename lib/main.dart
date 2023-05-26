@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 void main() {
   runApp(const MyApp());
@@ -66,7 +67,7 @@ class NewAppBar extends StatelessWidget {
   }
 }
 
-class NewNavBar extends StatelessWidget {
+class NewNavBar extends HookWidget {
   NewNavBar();
 
   void tocaramNoBotao(int index) {
@@ -75,8 +76,14 @@ class NewNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var state = useState(1);
+
     return BottomNavigationBar(
-      onTap: tocaramNoBotao,
+      onTap: (index) {
+        state.value = index;
+        tocaramNoBotao;
+      },
+      currentIndex: state.value,
       items: const [
         BottomNavigationBarItem(label: "Info", icon: Icon(Icons.info_outline)),
         BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(229, 230, 219, 219),
           appBar: AppBar(title: NewAppBar()),
           body: Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: EdgeInsets.all(40.0),
             child: Container(
               height: 200,
               decoration: BoxDecoration(
@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
-                    'Confira a previsão do tempo da sua cidade',
+                    'Confira a Previsão do Tempo',
                     style: TextStyle(fontSize: 24),
                   ),
                   Padding(
@@ -45,6 +45,15 @@ class MyApp extends StatelessWidget {
                         icon: Icon(Icons.search),
                       ),
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/01d.png'),
+                      Text('BR, Caicó, 32.24ºC, céu limpo',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold))
+                    ],
                   ),
                 ],
               ),

@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           body: Padding(
             padding: EdgeInsets.all(40.0),
             child: Container(
-              height: 200,
+              height: 300,
               decoration: BoxDecoration(
                 color: Colors
                     .white, // Cor de fundo do Container definida como branco
@@ -55,6 +55,27 @@ class MyApp extends StatelessWidget {
                               fontSize: 16, fontWeight: FontWeight.bold))
                     ],
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('A sensação térmica em Caicó é de 32.82ºC')
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.water_drop,
+                        size: 24,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        'Humidity 41% | Probabilidade média de chuva',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

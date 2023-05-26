@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(229, 230, 219, 219),
           appBar: AppBar(title: NewAppBar()),
           body: Padding(
-            padding: EdgeInsets.all(40.0),
+            padding: EdgeInsets.all(20.0),
             child: Container(
               height: 300,
               decoration: BoxDecoration(
@@ -58,7 +58,10 @@ class MyApp extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('A sensação térmica em Caicó é de 32.82ºC')
+                      Text(
+                        'A sensação térmica em Caicó é de 32.82ºC',
+                        style: TextStyle(fontSize: 16),
+                      )
                     ],
                   ),
                   Row(

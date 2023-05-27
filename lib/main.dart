@@ -95,6 +95,7 @@ class NewAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
         title: const Center(
+      icon: Icon(Icons.cloud_queue_outlined),
       child: Text("Forecast Now"),
     ));
   }

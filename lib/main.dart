@@ -109,12 +109,18 @@ class NewAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Center(
+        title: const Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.cloud_outlined),
-          Text("  Forecast Now  "),
+          Icon(
+            Icons.cloud_outlined,
+            size: 40,
+          ),
+          Text(
+            "  Forecast Now  ",
+            style: TextStyle(fontSize: 25),
+          ),
         ],
       ),
     ));

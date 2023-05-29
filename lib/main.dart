@@ -1,5 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class WeatherData {
+  final String cityName;
+  final double temperature;
+  final String weatherDescription;
+
+  WeatherData({
+    required this.cityName,
+    required this.temperature,
+    required this.weatherDescription,
+  });
+}
+
+Future<WeatherData> fetchWeatherData() async {
+  var previsaoSimplesUri = Uri(
+    scheme: 'https',
+    host: 'api.openweathermap.org',
+    path: 'data/2.5/weather',
+    queryParameters: {
+      'q': 'caico',
+      'units': 'metric',
+      'appid': 'd54d9d02c25c79b822c4d38bbc3a1e47',
+      'lang': 'pt_br'
+    },
+  );
+
+  var response = await http.get(previsaoSimplesUri);
+  if (response.statusCode == 200) {
+    var data = json.decode(response.body);
+    return WeatherData(
+      cityName: data['name'],
+      temperature: data['main']['temp'],
+      weatherDescription: data['weather'][0]['description'],
+    );
+  } else {
+    throw Exception('Falha ao carregar os dados da API');
+  }
+}
 
 void main() {
   runApp(const MyApp());
@@ -11,119 +51,146 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          primarySwatch: const MaterialColor(
-            0xFF282C34, // Valor hexadecimal da cor
-            <int, Color>{
-              50: Color.fromRGBO(40, 44, 52,
-                  1), // Define a cor para diferentes tons (opcional)
-              100: Color.fromRGBO(40, 44, 52, 1),
-              200: Color.fromRGBO(40, 44, 52, 1),
-              300: Color.fromRGBO(40, 44, 52, 1),
-              400: Color.fromRGBO(40, 44, 52, 1),
-              500: Color.fromRGBO(40, 44, 52, 1),
-              600: Color.fromRGBO(40, 44, 52, 1),
-              700: Color.fromRGBO(40, 44, 52, 1),
-              800: Color.fromRGBO(40, 44, 52, 1),
-              900: Color.fromRGBO(40, 44, 52, 1),
-            },
-          ),
+      theme: ThemeData(
+        primarySwatch: const MaterialColor(
+          0xFF282C34,
+          <int, Color>{
+            50: Color.fromRGBO(40, 44, 52, 1),
+            100: Color.fromRGBO(40, 44, 52, 1),
+            200: Color.fromRGBO(40, 44, 52, 1),
+            300: Color.fromRGBO(40, 44, 52, 1),
+            400: Color.fromRGBO(40, 44, 52, 1),
+            500: Color.fromRGBO(40, 44, 52, 1),
+            600: Color.fromRGBO(40, 44, 52, 1),
+            700: Color.fromRGBO(40, 44, 52, 1),
+            800: Color.fromRGBO(40, 44, 52, 1),
+            900: Color.fromRGBO(40, 44, 52, 1),
+          },
         ),
-        debugShowCheckedModeBanner: false, // Removendo o banner de debug
-        home: Scaffold(
-          backgroundColor: Color.fromARGB(217, 217, 217, 219),
-          appBar: AppBar(title: NewAppBar()),
-          body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Container(
-              height: 300,
-              decoration: BoxDecoration(
-                color: Colors
-                    .white, // Cor de fundo do Container definida como branco
-                borderRadius: BorderRadius.circular(
-                    10.0), // Valor de raio para deixar a borda arredondada
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Confira a Previsão do Tempo',
-                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 20.0,
-                        horizontal: 20.0), // Adicionando margem nas laterais
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Digite uma cidade...',
-                        icon: Icon(Icons.search),
-                      ),
+      ),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: const Color.fromARGB(217, 217, 217, 219),
+        appBar: AppBar(title: const NewAppBar()),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            height: 300,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Confira a Previsão do Tempo',
+                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                ),
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Digite uma cidade...',
+                      icon: Icon(Icons.search),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/01d.png'),
-                      const Text('BR, Caicó, 32.24ºC, céu limpo',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold))
-                    ],
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'A sensação térmica em Caicó é de 32.82ºC',
-                        style: TextStyle(fontSize: 16),
-                      )
-                    ],
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.water_drop,
-                        size: 24,
-                        color: Colors.blue,
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        'Humidity 41% | Probabilidade média de chuva',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                ),
+                FutureBuilder<WeatherData>(
+                  future: fetchWeatherData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return const Text('Erro ao carregar os dados da API');
+                    } else {
+                      var weatherData = snapshot.data!;
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/01d.png'),
+                              Text(
+                                '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.wb_sunny,
+                                size: 24,
+                                color: Colors.orange,
+                              ),
+                              const SizedBox(width: 5),
+                              const Text(
+                                'Sunny',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.water_drop,
+                                size: 24,
+                                color: Colors.blue,
+                              ),
+                              const SizedBox(width: 5),
+                              const Text(
+                                'Humidity 41%',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    }
+                  },
+                ),
+              ],
             ),
           ),
-          bottomNavigationBar: NewNavBar(),
-        ));
+        ),
+        bottomNavigationBar: NewNavBar(),
+      ),
+    );
   }
 }
 
 class NewAppBar extends StatelessWidget {
-  NewAppBar();
+  const NewAppBar();
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        title: const Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.cloud_outlined,
-            size: 40,
-          ),
-          Text(
-            "  Forecast Now  ",
-            style: TextStyle(fontSize: 25),
-          ),
-        ],
+      title: const Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.cloud_outlined,
+              size: 40,
+            ),
+            Text(
+              '  Forecast Now  ',
+              style: TextStyle(fontSize: 25),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
 

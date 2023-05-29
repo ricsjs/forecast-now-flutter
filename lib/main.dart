@@ -123,32 +123,32 @@ class MyApp extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 10),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.wb_sunny,
                                 size: 24,
                                 color: Colors.orange,
                               ),
-                              const SizedBox(width: 5),
-                              const Text(
+                              SizedBox(width: 5),
+                              Text(
                                 'Sunny',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ],
                           ),
                           const SizedBox(height: 10),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.water_drop,
                                 size: 24,
                                 color: Colors.blue,
                               ),
-                              const SizedBox(width: 5),
-                              const Text(
+                              SizedBox(width: 5),
+                              Text(
                                 'Humidity 41%',
                                 style: TextStyle(fontSize: 16),
                               ),
@@ -208,8 +208,8 @@ class NewNavBar extends HookWidget {
     return Theme(
       data: Theme.of(context).copyWith(
         canvasColor:
-            Color.fromRGBO(40, 44, 52, 1), // Defina a cor de fundo desejada
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(),
+            const Color.fromRGBO(40, 44, 52, 1), // Defina a cor de fundo desejada
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
       ),
       child: BottomNavigationBar(
         onTap: (index) {
@@ -217,10 +217,9 @@ class NewNavBar extends HookWidget {
           tocaramNoBotao;
         },
         currentIndex: state.value,
-        unselectedIconTheme: IconThemeData(
-            color: Colors
-                .grey), // Define a cor dos ícones não selecionados como branco
-        selectedIconTheme: IconThemeData(color: Colors.white),
+        unselectedIconTheme: const IconThemeData(
+             color: Colors.grey), // Define a cor dos ícones não selecionados como branco
+        selectedIconTheme: const IconThemeData(color: Colors.white),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         items: const [

@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          primarySwatch: MaterialColor(
+          primarySwatch: const MaterialColor(
             0xFF282C34, // Valor hexadecimal da cor
             <int, Color>{
               50: Color.fromRGBO(40, 44, 52,
@@ -46,11 +46,11 @@ class MyApp extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Confira a Previsão do Tempo',
                     style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.symmetric(
                         vertical: 20.0,
                         horizontal: 20.0), // Adicionando margem nas laterais
@@ -65,12 +65,12 @@ class MyApp extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/01d.png'),
-                      Text('BR, Caicó, 32.24ºC, céu limpo',
+                      const Text('BR, Caicó, 32.24ºC, céu limpo',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold))
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
                       )
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(

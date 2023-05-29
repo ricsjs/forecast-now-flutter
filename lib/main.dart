@@ -190,9 +190,9 @@ class NewNavBar extends HookWidget {
 
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor:
-            Color.fromRGBO(40, 44, 52, 1), // Defina a cor de fundo desejada
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(),
+        canvasColor: const Color.fromRGBO(
+            40, 44, 52, 1), // Defina a cor de fundo desejada
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
       ),
       child: BottomNavigationBar(
         onTap: (index) {
@@ -200,10 +200,10 @@ class NewNavBar extends HookWidget {
           tocaramNoBotao;
         },
         currentIndex: state.value,
-        unselectedIconTheme: IconThemeData(
+        unselectedIconTheme: const IconThemeData(
             color: Colors
                 .grey), // Define a cor dos ícones não selecionados como branco
-        selectedIconTheme: IconThemeData(color: Colors.white),
+        selectedIconTheme: const IconThemeData(color: Colors.white),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         items: const [

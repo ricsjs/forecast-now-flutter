@@ -122,33 +122,16 @@ class MyApp extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 10),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
-                                Icons.wb_sunny,
-                                size: 24,
-                                color: Colors.orange,
-                              ),
-                              const SizedBox(width: 5),
-                              const Text(
-                                'Sunny',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
+                              Icon(
                                 Icons.water_drop,
                                 size: 24,
                                 color: Colors.blue,
                               ),
-                              const SizedBox(width: 5),
-                              const Text(
+                              SizedBox(width: 5),
+                              Text(
                                 'Humidity 41%',
                                 style: TextStyle(fontSize: 16),
                               ),

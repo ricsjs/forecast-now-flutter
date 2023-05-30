@@ -122,23 +122,6 @@ class MyApp extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 10),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.wb_sunny,
-                                size: 24,
-                                color: Colors.orange,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                'Sunny',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -207,8 +190,8 @@ class NewNavBar extends HookWidget {
 
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor:
-            const Color.fromRGBO(40, 44, 52, 1), // Defina a cor de fundo desejada
+        canvasColor: const Color.fromRGBO(
+            40, 44, 52, 1), // Defina a cor de fundo desejada
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
       ),
       child: BottomNavigationBar(
@@ -218,7 +201,8 @@ class NewNavBar extends HookWidget {
         },
         currentIndex: state.value,
         unselectedIconTheme: const IconThemeData(
-             color: Colors.grey), // Define a cor dos ícones não selecionados como branco
+            color: Colors
+                .grey), // Define a cor dos ícones não selecionados como branco
         selectedIconTheme: const IconThemeData(color: Colors.white),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,

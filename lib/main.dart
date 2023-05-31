@@ -3,177 +3,94 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class WeatherData {
-  final String cityName;
-  final double temperature;
-  final String weatherDescription;
+class DataService {
+  final ValueNotifier<List> tableStateNotifier = new ValueNotifier([]);
+  var chaves = ["name", "code"];
+  var colunas = ["Nome", "Matriula"];
 
-  WeatherData({
-    required this.cityName,
-    required this.temperature,
-    required this.weatherDescription,
-  });
-}
+  void carregar(index) {
+    var carregadores = [
+      carregarIntegrantes,
+    ];
 
-Future<WeatherData> fetchWeatherData() async {
-  var previsaoSimplesUri = Uri(
-    scheme: 'https',
-    host: 'api.openweathermap.org',
-    path: 'data/2.5/weather',
-    queryParameters: {
-      'q': 'caico',
-      'units': 'metric',
-      'appid': 'd54d9d02c25c79b822c4d38bbc3a1e47',
-      'lang': 'pt_br'
-    },
-  );
+    carregadores[index]();
+  }
 
-  var response = await http.get(previsaoSimplesUri);
-  if (response.statusCode == 200) {
-    var data = json.decode(response.body);
-    return WeatherData(
-      cityName: data['name'],
-      temperature: data['main']['temp'],
-      weatherDescription: data['weather'][0]['description'],
-    );
-  } else {
-    throw Exception('Falha ao carregar os dados da API');
+  void PropIntegrantes() {
+    chaves = ["name", "code"];
+    colunas = ["Nome", "Matriula"];
+  }
+
+
+  void carregarIntegrantes() {
+    PropIntegrantes();
+
+    tableStateNotifier.value = [
+      {"name": "GABRIEL LIMA", "code": "20220043441"},
+      {"name": "LEONARDO ALVES", "code": "20220043915"},
+      {"name": "RICARDO ALENCAR", "code": "20210056689"}
+    ];
   }
 }
 
+final dataService = DataService();
+
 void main() {
-  runApp(const MyApp());
+  MyApp app = MyApp();
+
+  runApp(app);
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: const MaterialColor(
-          0xFF282C34,
-          <int, Color>{
-            50: Color.fromRGBO(40, 44, 52, 1),
-            100: Color.fromRGBO(40, 44, 52, 1),
-            200: Color.fromRGBO(40, 44, 52, 1),
-            300: Color.fromRGBO(40, 44, 52, 1),
-            400: Color.fromRGBO(40, 44, 52, 1),
-            500: Color.fromRGBO(40, 44, 52, 1),
-            600: Color.fromRGBO(40, 44, 52, 1),
-            700: Color.fromRGBO(40, 44, 52, 1),
-            800: Color.fromRGBO(40, 44, 52, 1),
-            900: Color.fromRGBO(40, 44, 52, 1),
-          },
-        ),
-      ),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: const Color.fromARGB(217, 217, 217, 219),
-        appBar: AppBar(title: const NewAppBar()),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Container(
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Confira a Previsão do Tempo',
-                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-                ),
-                const Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Digite uma cidade...',
-                      icon: Icon(Icons.search),
-                    ),
-                  ),
-                ),
-                FutureBuilder<WeatherData>(
-                  future: fetchWeatherData(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return const Text('Erro ao carregar os dados da API');
-                    } else {
-                      var weatherData = snapshot.data!;
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/01d.png'),
-                              Text(
-                                '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.water_drop,
-                                size: 24,
-                                color: Colors.blue,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                'Humidity 41%',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
-                          ),
-                        ],
-                      );
-                    }
-                  },
-                ),
-              ],
-            ),
+        theme: ThemeData(primarySwatch: Colors.deepPurple),
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text("Dicas"),
           ),
-        ),
-        bottomNavigationBar: NewNavBar(),
-      ),
-    );
+          body: ValueListenableBuilder(
+              valueListenable: dataService.tableStateNotifier,
+              builder: (_, value, __) {
+                return DataTableWidget(
+                  jsonObjects: value,
+                  propertyNames: dataService.chaves,
+                  columnNames: dataService.colunas,
+                );
+              }),
+        ));
   }
 }
 
-class NewAppBar extends StatelessWidget {
-  const NewAppBar();
+class DataTableWidget extends StatelessWidget {
+  final List jsonObjects;
+
+  final List<String> columnNames;
+
+  final List<String> propertyNames;
+
+  DataTableWidget(
+      {this.jsonObjects = const [],
+      this.columnNames = const ["Nome", "Matriula"],
+      this.propertyNames = const ["name", "code"]});
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: const Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.cloud_outlined,
-              size: 40,
-            ),
-            Text(
-              '  Forecast Now  ',
-              style: TextStyle(fontSize: 25),
-            ),
-          ],
-        ),
-      ),
-    );
+    return DataTable(
+        columns: columnNames
+            .map((name) => DataColumn(
+                label: Expanded(
+                    child: Text(name,
+                        style: TextStyle(fontStyle: FontStyle.italic)))))
+            .toList(),
+        rows: jsonObjects
+            .map((obj) => DataRow(
+                cells: propertyNames
+                    .map((propName) => DataCell(Text(obj[propName])))
+                    .toList()))
+            .toList());
   }
 }
 

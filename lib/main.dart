@@ -15,13 +15,13 @@ class WeatherData {
   });
 }
 
-Future<WeatherData> fetchWeatherData() async {
+Future<WeatherData> fetchWeatherData(String city) async {
   var previsaoSimplesUri = Uri(
     scheme: 'https',
     host: 'api.openweathermap.org',
     path: 'data/2.5/weather',
     queryParameters: {
-      'q': 'caico',
+      'q': city,
       'units': 'metric',
       'appid': 'd54d9d02c25c79b822c4d38bbc3a1e47',
       'lang': 'pt_br'
@@ -45,8 +45,16 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String valorTextField = 'caico';
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -87,18 +95,32 @@ class MyApp extends StatelessWidget {
                   'Confira a Previsão do Tempo',
                   style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
                 ),
-                const Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 20.0, horizontal: 20.0),
                   child: TextField(
+                    controller: _controller,
+                    onChanged: (value) {},
                     decoration: InputDecoration(
                       hintText: 'Digite uma cidade...',
                       icon: Icon(Icons.search),
                     ),
                   ),
                 ),
+                TextButton(
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                        valorTextField = _controller.text;
+                      });
+                    },
+                    child: Text('Buscar')),
                 FutureBuilder<WeatherData>(
-                  future: fetchWeatherData(),
+                  future: fetchWeatherData(valorTextField),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CircularProgressIndicator();

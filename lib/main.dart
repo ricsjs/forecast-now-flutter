@@ -14,6 +14,7 @@ class WeatherData {
     required this.weatherDescription,
   });
 }
+  
 
 Future<WeatherData> fetchWeatherData(String city) async {
   var previsaoSimplesUri = Uri(
@@ -168,7 +169,9 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
-        bottomNavigationBar: NewNavBar(),
+        bottomNavigationBar: NewNavBar(
+          itemSelectedCallback: WeatherData,
+        ),
       ),
     );
   }
@@ -200,7 +203,11 @@ class NewAppBar extends StatelessWidget {
 }
 
 class NewNavBar extends HookWidget {
-  NewNavBar();
+  var _itemSelectedCallback;
+
+  NewNavBar({itemSelectedCallback}) {
+    _itemSelectedCallback ??= (_) {};
+  }
 
   void tocaramNoBotao(int index) {
     print("Tocaram no botão $index");
@@ -219,7 +226,8 @@ class NewNavBar extends HookWidget {
       child: BottomNavigationBar(
         onTap: (index) {
           state.value = index;
-          tocaramNoBotao;
+          _itemSelectedCallback(index);
+          tocaramNoBotao(index);
         },
         currentIndex: state.value,
         unselectedIconTheme: const IconThemeData(

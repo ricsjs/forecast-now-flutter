@@ -30,7 +30,21 @@ class MyApp extends StatelessWidget {
 
           appBar: AppBar(
 
-            title: const Text("Dicas"),
+            title: const Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.cloud_outlined,
+                    size: 40,
+                  ),
+                  Text(
+                    '  Forecast Now  ',
+                    style: TextStyle(fontSize: 25),
+            ),
+          ],
+        ),
+      ),
 
           ),
 
@@ -68,17 +82,16 @@ class NewNavBar extends StatelessWidget {
 
       BottomNavigationBarItem(
 
-        label: "Cafés",
-
-        icon: Icon(Icons.coffee_outlined),
+        label: "Info", icon: Icon(Icons.info_outline),
 
       ),
 
       BottomNavigationBarItem(
 
-          label: "Cervejas", icon: Icon(Icons.local_drink_outlined)),
+          label: "Home", icon: Icon(Icons.home)),
 
-      BottomNavigationBarItem(label: "Nações", icon: Icon(Icons.flag_outlined))
+      BottomNavigationBarItem(
+          label: "Previsão detalhada", icon: Icon(Icons.filter_drama)),
 
     ]);
 
@@ -100,19 +113,19 @@ class DataBodyWidget extends StatelessWidget {
 
       Expanded(
 
-        child: Text("La Fin Du Monde - Bock - 65 ibu"),
+        child: Text("Esse projeto foi utilizado uma API para puxar informações detalhadas sobre tempo e o clima de uma região"),
 
       ),
 
       Expanded(
 
-        child: Text("Sapporo Premiume - Sour Ale - 54 ibu"),
+        child: Text("Os integrantes para construção desse sistemas foram, Gabriel Lima, Leonardo Alves, Ricardo Alencar"),
 
       ),
 
       Expanded(
 
-        child: Text("Duvel - Pilsner - 82 ibu"),
+        child: Text("Para utilizar esse sistema basta digitar o nome da cidade ou região que você mora e clicar em buscar para puxar as informações climaticas dessee local"),
 
       )
 

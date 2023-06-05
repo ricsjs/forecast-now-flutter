@@ -14,7 +14,6 @@ class WeatherData {
     required this.weatherDescription,
   });
 }
-  
 
 Future<WeatherData> fetchWeatherData(String city) async {
   var previsaoSimplesUri = Uri(
@@ -54,8 +53,23 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String valorTextField = 'caico';
+  late String valorTextField;
   TextEditingController _controller = TextEditingController();
+  late PageController _pageController;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    valorTextField = 'caico';
+    _pageController = PageController(initialPage: _currentPage);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,85 +106,147 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Confira a Previsão do Tempo',
-                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 20.0, horizontal: 20.0),
-                  child: TextField(
-                    controller: _controller,
-                    onChanged: (value) {},
-                    decoration: InputDecoration(
-                      hintText: 'Digite uma cidade...',
-                      icon: Icon(Icons.search),
-                    ),
-                  ),
-                ),
-                TextButton(
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue),
-                    ),
-                    onPressed: () {
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    onPageChanged: (index) {
                       setState(() {
-                        // Atualiza o valor da variável valorTextField com o valor atual do TextField
-                        valorTextField = _controller.text;
+                        _currentPage = index;
                       });
                     },
-                    child: Text('Buscar')),
-                FutureBuilder<WeatherData>(
-                  future: fetchWeatherData(valorTextField),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return const Text('Erro ao carregar os dados da API');
-                    } else {
-                      var weatherData = snapshot.data!;
-                      return Column(
+                    children: [
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/01d.png'),
-                              Text(
-                                '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.water_drop,
-                                size: 24,
-                                color: Colors.blue,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                'Humidity 41%',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
+                          const Text(
+                            'Page 1',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
-                      );
-                    }
-                  },
+                      ),
+                      Container(
+                        height: 300,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Confira a Previsão do Tempo',
+                              style: TextStyle(
+                                  fontSize: 21, fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 20.0),
+                              child: TextField(
+                                controller: _controller,
+                                onChanged: (value) {},
+                                decoration: InputDecoration(
+                                  hintText: 'Digite uma cidade...',
+                                  icon: Icon(Icons.search),
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                                style: ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.blue),
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                                    valorTextField = _controller.text;
+                                  });
+                                },
+                                child: Text('Buscar')),
+                            FutureBuilder<WeatherData>(
+                              future: fetchWeatherData(valorTextField),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const CircularProgressIndicator();
+                                } else if (snapshot.hasError) {
+                                  return const Text(
+                                      'Erro ao carregar os dados da API');
+                                } else {
+                                  var weatherData = snapshot.data!;
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset('assets/images/01d.png'),
+                                          Text(
+                                            '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.water_drop,
+                                            size: 24,
+                                            color: Colors.blue,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            'Humidity 41%',
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                }
+                              },
+                            ),
+                          ],
+
+                          // container I
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Page 3',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
         ),
         bottomNavigationBar: NewNavBar(
-          itemSelectedCallback: WeatherData,
+          itemSelectedCallback: (index) {
+            _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+            );
+          },
         ),
       ),
     );
@@ -203,11 +279,9 @@ class NewAppBar extends StatelessWidget {
 }
 
 class NewNavBar extends HookWidget {
-  var _itemSelectedCallback;
+  final void Function(int) itemSelectedCallback;
 
-  NewNavBar({itemSelectedCallback}) {
-    _itemSelectedCallback ??= (_) {};
-  }
+  const NewNavBar({required this.itemSelectedCallback});
 
   void tocaramNoBotao(int index) {
     print("Tocaram no botão $index");
@@ -219,29 +293,35 @@ class NewNavBar extends HookWidget {
 
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor: const Color.fromRGBO(
-            40, 44, 52, 1), // Defina a cor de fundo desejada
+        canvasColor: const Color.fromRGBO(40, 44, 52, 1),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
       ),
       child: BottomNavigationBar(
         onTap: (index) {
           state.value = index;
-          _itemSelectedCallback(index);
+          itemSelectedCallback(index);
           tocaramNoBotao(index);
         },
         currentIndex: state.value,
         unselectedIconTheme: const IconThemeData(
-            color: Colors
-                .grey), // Define a cor dos ícones não selecionados como branco
+          color: Colors.grey,
+        ),
         selectedIconTheme: const IconThemeData(color: Colors.white),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(
-              label: "Info", icon: Icon(Icons.info_outline)),
-          BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
+            label: "Info",
+            icon: Icon(Icons.info_outline),
+          ),
           BottomNavigationBarItem(
-              label: "Previsão detalhada", icon: Icon(Icons.filter_drama))
+            label: "Home",
+            icon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            label: "Previsão detalhada",
+            icon: Icon(Icons.filter_drama),
+          ),
         ],
       ),
     );

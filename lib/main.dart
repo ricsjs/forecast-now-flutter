@@ -11,6 +11,8 @@ class WeatherData {
   final int humidity;
   final String icontmp;
   final int pressure;
+  final double windspeed;
+  final int cloud;
 
   WeatherData(
       {required this.cityName,
@@ -19,7 +21,9 @@ class WeatherData {
       required this.feelslike,
       required this.humidity,
       required this.icontmp,
-      required this.pressure});
+      required this.pressure,
+      required this.windspeed,
+      required this.cloud});
 }
 
 Future<WeatherData> fetchWeatherData(String city) async {
@@ -45,7 +49,9 @@ Future<WeatherData> fetchWeatherData(String city) async {
         feelslike: data['main']['feels_like'],
         humidity: data['main']['humidity'],
         icontmp: data['weather'][0]['icon'],
-        pressure: data['main']['pressure'] );
+        pressure: data['main']['pressure'],
+        windspeed: data['wind']['speed'],
+        cloud: data ['clouds']['all']);
   } else {
     throw Exception('Falha ao carregar os dados da API');
   }
@@ -108,7 +114,7 @@ class _MyAppState extends State<MyApp> {
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Container(
-            height: 300,
+            height: 500,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
@@ -125,30 +131,25 @@ class _MyAppState extends State<MyApp> {
                       });
                     },
                     children: [
+                      // PÁGINA 1
                       const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-
-                                    child: Text("Esse projeto foi utilizado uma API para puxar informações detalhadas sobre tempo e o clima de uma região"),
-
-                                  ),
-
-                                  Expanded(
-
-                                    child: Text("Os integrantes para construção desse sistemas foram, Gabriel Lima, Leonardo Alves, Ricardo Alencar"),
-
-                                  ),
-
-                                  Expanded(
-
-                                    child: Text("Para utilizar esse sistema basta digitar o nome da cidade ou região que você mora e clicar em buscar para puxar as informações climaticas dessee local"),
-
-                                  )
-
-                                
+                            child: Text(
+                                "Esse projeto foi utilizado uma API para puxar informações detalhadas sobre tempo e o clima de uma região"),
+                          ),
+                          Expanded(
+                            child: Text(
+                                "Os integrantes para construção desse sistemas foram, Gabriel Lima, Leonardo Alves, Ricardo Alencar"),
+                          ),
+                          Expanded(
+                            child: Text(
+                                "Para utilizar esse sistema basta digitar o nome da cidade ou região que você mora e clicar em buscar para puxar as informações climaticas dessee local"),
+                          )
                         ],
                       ),
+                      // PÁGINA 2
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -229,19 +230,7 @@ class _MyAppState extends State<MyApp> {
                                               fontWeight: FontWeight.w500),
                                         ),
                                       ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'A sensação térmica em ${weatherData.cityName} é ${weatherData.feelslike}ºC',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16),
-                                        )
-                                      ],
-                                    ),
+                                    ),                                    
                                   ],
                                 );
                               }
@@ -255,13 +244,13 @@ class _MyAppState extends State<MyApp> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            'Confira a Previsão do Tempo Detalhada',
+                            'Previsão do Tempo Detalhada',
                             style: TextStyle(
                                 fontSize: 21, fontWeight: FontWeight.bold),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 20.0, horizontal: 20.0),
+                                vertical: 40.0, horizontal: 20.0),
                             child: TextField(
                               controller: _controller,
                               onChanged: (value) {},
@@ -309,7 +298,7 @@ class _MyAppState extends State<MyApp> {
                                           '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
                                           style: const TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ],
@@ -349,7 +338,31 @@ class _MyAppState extends State<MyApp> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Pressão atmosférica: ${weatherData.pressure} Pa',
+                                          'Pressão atmosférica: ${weatherData.pressure} hPa',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Velocidade do vento: ${weatherData.windspeed} m/s',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Nuvens: ${weatherData.cloud} %',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 16),

@@ -7,12 +7,17 @@ class WeatherData {
   final String cityName;
   final double temperature;
   final String weatherDescription;
+  final double feelslike;
+  final int humidity;
+  final String icontmp;
 
-  WeatherData({
-    required this.cityName,
-    required this.temperature,
-    required this.weatherDescription,
-  });
+  WeatherData(
+      {required this.cityName,
+      required this.temperature,
+      required this.weatherDescription,
+      required this.feelslike,
+      required this.humidity,
+      required this.icontmp});
 }
 
 Future<WeatherData> fetchWeatherData(String city) async {
@@ -32,10 +37,12 @@ Future<WeatherData> fetchWeatherData(String city) async {
   if (response.statusCode == 200) {
     var data = json.decode(response.body);
     return WeatherData(
-      cityName: data['name'],
-      temperature: data['main']['temp'],
-      weatherDescription: data['weather'][0]['description'],
-    );
+        cityName: data['name'],
+        temperature: data['main']['temp'],
+        weatherDescription: data['weather'][0]['description'],
+        feelslike: data['main']['feels_like'],
+        humidity: data['main']['humidity'],
+        icontmp: data['weather'][0]['icon']);
   } else {
     throw Exception('Falha ao carregar os dados da API');
   }
@@ -56,7 +63,7 @@ class _MyAppState extends State<MyApp> {
   late String valorTextField;
   TextEditingController _controller = TextEditingController();
   late PageController _pageController;
-  int _currentPage = 0;
+  int _currentPage = 1;
 
   @override
   void initState() {
@@ -115,10 +122,10 @@ class _MyAppState extends State<MyApp> {
                       });
                     },
                     children: [
-                      Column(
+                      const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             'Page 1',
                             style: TextStyle(
                               fontSize: 16,
@@ -128,7 +135,7 @@ class _MyAppState extends State<MyApp> {
                         ],
                       ),
                       Container(
-                        height: 300,
+                        height: 500,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10.0),
@@ -147,7 +154,7 @@ class _MyAppState extends State<MyApp> {
                               child: TextField(
                                 controller: _controller,
                                 onChanged: (value) {},
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: 'Digite uma cidade...',
                                   icon: Icon(Icons.search),
                                 ),
@@ -177,6 +184,8 @@ class _MyAppState extends State<MyApp> {
                                       'Erro ao carregar os dados da API');
                                 } else {
                                   var weatherData = snapshot.data!;
+                                  var iconUrl =
+                                      'https://openweathermap.org/img/wn/${weatherData.icontmp}.png';
                                   return Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -184,7 +193,7 @@ class _MyAppState extends State<MyApp> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Image.asset('assets/images/01d.png'),
+                                          Image.network(iconUrl),
                                           Text(
                                             '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
                                             style: const TextStyle(
@@ -194,7 +203,7 @@ class _MyAppState extends State<MyApp> {
                                           ),
                                         ],
                                       ),
-                                      const Row(
+                                      Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -205,9 +214,23 @@ class _MyAppState extends State<MyApp> {
                                           ),
                                           SizedBox(width: 5),
                                           Text(
-                                            'Humidity 41%',
-                                            style: TextStyle(fontSize: 16),
+                                            'Umidade: ${weatherData.humidity}%',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500),
                                           ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'A sensação térmica em ${weatherData.cityName} é ${weatherData.feelslike}ºC',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 16),
+                                          )
                                         ],
                                       ),
                                     ],
@@ -220,10 +243,10 @@ class _MyAppState extends State<MyApp> {
                           // container I
                         ),
                       ),
-                      Column(
+                      const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             'Page 3',
                             style: TextStyle(
                               fontSize: 16,

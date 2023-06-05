@@ -128,7 +128,7 @@ class _MyAppState extends State<MyApp> {
                           Text(
                             'Page 1',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 21,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -243,15 +243,21 @@ class _MyAppState extends State<MyApp> {
                           // container I
                         ),
                       ),
-                      const Column(
+                      // PAGINA 3
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Page 3',
-                            style: TextStyle(
-                              fontSize: 16,
+                            '${valorTextField.toUpperCase()} - previsão do tempo detalhada',
+                            style: const TextStyle(
+                              fontSize: 21,
                               fontWeight: FontWeight.bold,
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 40.0, horizontal: 20.0),
+                            child: Text('Cidade $valorTextField'),
                           ),
                         ],
                       ),

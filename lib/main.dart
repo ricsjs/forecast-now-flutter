@@ -9,13 +9,15 @@ class WeatherData {
   final String weatherDescription;
   final double feelslike;
   final int humidity;
+  final String icontmp;
 
   WeatherData(
       {required this.cityName,
       required this.temperature,
       required this.weatherDescription,
       required this.feelslike,
-      required this.humidity});
+      required this.humidity,
+      required this.icontmp});
 }
 
 Future<WeatherData> fetchWeatherData(String city) async {
@@ -39,7 +41,8 @@ Future<WeatherData> fetchWeatherData(String city) async {
         temperature: data['main']['temp'],
         weatherDescription: data['weather'][0]['description'],
         feelslike: data['main']['feels_like'],
-        humidity: data['main']['humidity']);
+        humidity: data['main']['humidity'],
+        icontmp: data['weather'][0]['icon']);
   } else {
     throw Exception('Falha ao carregar os dados da API');
   }
@@ -181,6 +184,8 @@ class _MyAppState extends State<MyApp> {
                                       'Erro ao carregar os dados da API');
                                 } else {
                                   var weatherData = snapshot.data!;
+                                  var iconUrl =
+                                      'https://openweathermap.org/img/wn/${weatherData.icontmp}.png';
                                   return Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -188,7 +193,7 @@ class _MyAppState extends State<MyApp> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Image.asset('assets/images/01d.png'),
+                                          Image.network(iconUrl),
                                           Text(
                                             '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
                                             style: const TextStyle(

@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
   late String valorTextField;
   TextEditingController _controller = TextEditingController();
   late PageController _pageController;
-  int _currentPage = 0;
+  int _currentPage = 1;
 
   @override
   void initState() {
@@ -115,120 +115,119 @@ class _MyAppState extends State<MyApp> {
                       });
                     },
                     children: [
-                      Column(
+                      // PÁGINA 1
+                      const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             'Page 1',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 21,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],
                       ),
-                      Container(
-                        height: 300,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Confira a Previsão do Tempo',
-                              style: TextStyle(
-                                  fontSize: 21, fontWeight: FontWeight.bold),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 20.0),
-                              child: TextField(
-                                controller: _controller,
-                                onChanged: (value) {},
-                                decoration: InputDecoration(
-                                  hintText: 'Digite uma cidade...',
-                                  icon: Icon(Icons.search),
-                                ),
-                              ),
-                            ),
-                            TextButton(
-                                style: ButtonStyle(
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.blue),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    // Atualiza o valor da variável valorTextField com o valor atual do TextField
-                                    valorTextField = _controller.text;
-                                  });
-                                },
-                                child: Text('Buscar')),
-                            FutureBuilder<WeatherData>(
-                              future: fetchWeatherData(valorTextField),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const CircularProgressIndicator();
-                                } else if (snapshot.hasError) {
-                                  return const Text(
-                                      'Erro ao carregar os dados da API');
-                                } else {
-                                  var weatherData = snapshot.data!;
-                                  return Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset('assets/images/01d.png'),
-                                          Text(
-                                            '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.water_drop,
-                                            size: 24,
-                                            color: Colors.blue,
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            'Humidity 41%',
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  );
-                                }
-                              },
-                            ),
-                          ],
-
-                          // container I
-                        ),
-                      ),
+                      // PÁGINA 2
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            'Page 3',
+                            'Confira a Previsão do Tempo',
                             style: TextStyle(
-                              fontSize: 16,
+                                fontSize: 21, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20.0, horizontal: 20.0),
+                            child: TextField(
+                              controller: _controller,
+                              onChanged: (value) {},
+                              decoration: const InputDecoration(
+                                hintText: 'Digite uma cidade...',
+                                icon: Icon(Icons.search),
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                              style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.blue),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                                  valorTextField = _controller.text;
+                                });
+                              },
+                              child: const Text('Buscar')),
+                          FutureBuilder<WeatherData>(
+                            future: fetchWeatherData(valorTextField),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return const Text(
+                                    'Erro ao carregar os dados da API');
+                              } else {
+                                var weatherData = snapshot.data!;
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset('assets/images/01d.png'),
+                                        Text(
+                                          '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.water_drop,
+                                          size: 24,
+                                          color: Colors.blue,
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'Humidity 41%',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                      // PAGINA 3
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '${valorTextField.toUpperCase()} - previsão do tempo detalhada',
+                            style: const TextStyle(
+                              fontSize: 21,
                               fontWeight: FontWeight.bold,
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 40.0, horizontal: 20.0),
+                            child: Text('Cidade $valorTextField'),
                           ),
                         ],
                       ),

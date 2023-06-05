@@ -126,24 +126,17 @@ class _MyAppState extends State<MyApp> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-
-                                    child: Text("Esse projeto foi utilizado uma API para puxar informações detalhadas sobre tempo e o clima de uma região"),
-
-                                  ),
-
-                                  Expanded(
-
-                                    child: Text("Os integrantes para construção desse sistemas foram, Gabriel Lima, Leonardo Alves, Ricardo Alencar"),
-
-                                  ),
-
-                                  Expanded(
-
-                                    child: Text("Para utilizar esse sistema basta digitar o nome da cidade ou região que você mora e clicar em buscar para puxar as informações climaticas dessee local"),
-
-                                  )
-
-                                
+                            child: Text(
+                                "Esse projeto foi utilizado uma API para puxar informações detalhadas sobre tempo e o clima de uma região"),
+                          ),
+                          Expanded(
+                            child: Text(
+                                "Os integrantes para construção desse sistemas foram, Gabriel Lima, Leonardo Alves, Ricardo Alencar"),
+                          ),
+                          Expanded(
+                            child: Text(
+                                "Para utilizar esse sistema basta digitar o nome da cidade ou região que você mora e clicar em buscar para puxar as informações climaticas dessee local"),
+                          )
                         ],
                       ),
                       Container(

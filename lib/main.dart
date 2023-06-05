@@ -10,6 +10,7 @@ class WeatherData {
   final double feelslike;
   final int humidity;
   final String icontmp;
+  final int pressure;
 
   WeatherData(
       {required this.cityName,
@@ -17,7 +18,8 @@ class WeatherData {
       required this.weatherDescription,
       required this.feelslike,
       required this.humidity,
-      required this.icontmp});
+      required this.icontmp,
+      required this.pressure});
 }
 
 Future<WeatherData> fetchWeatherData(String city) async {
@@ -42,7 +44,8 @@ Future<WeatherData> fetchWeatherData(String city) async {
         weatherDescription: data['weather'][0]['description'],
         feelslike: data['main']['feels_like'],
         humidity: data['main']['humidity'],
-        icontmp: data['weather'][0]['icon']);
+        icontmp: data['weather'][0]['icon'],
+        pressure: data['main']['pressure'] );
   } else {
     throw Exception('Falha ao carregar os dados da API');
   }
@@ -134,130 +137,217 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ],
                       ),
-                      Container(
-                        height: 500,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Confira a Previsão do Tempo',
-                              style: TextStyle(
-                                  fontSize: 21, fontWeight: FontWeight.bold),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 20.0),
-                              child: TextField(
-                                controller: _controller,
-                                onChanged: (value) {},
-                                decoration: const InputDecoration(
-                                  hintText: 'Digite uma cidade...',
-                                  icon: Icon(Icons.search),
-                                ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Confira a Previsão do Tempo',
+                            style: TextStyle(
+                                fontSize: 21, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20.0, horizontal: 20.0),
+                            child: TextField(
+                              controller: _controller,
+                              onChanged: (value) {},
+                              decoration: const InputDecoration(
+                                hintText: 'Digite uma cidade...',
+                                icon: Icon(Icons.search),
                               ),
                             ),
-                            TextButton(
-                                style: ButtonStyle(
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.blue),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    // Atualiza o valor da variável valorTextField com o valor atual do TextField
-                                    valorTextField = _controller.text;
-                                  });
-                                },
-                                child: Text('Buscar')),
-                            FutureBuilder<WeatherData>(
-                              future: fetchWeatherData(valorTextField),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const CircularProgressIndicator();
-                                } else if (snapshot.hasError) {
-                                  return const Text(
-                                      'Erro ao carregar os dados da API');
-                                } else {
-                                  var weatherData = snapshot.data!;
-                                  var iconUrl =
-                                      'https://openweathermap.org/img/wn/${weatherData.icontmp}.png';
-                                  return Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.network(iconUrl),
-                                          Text(
-                                            '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.water_drop,
-                                            size: 24,
-                                            color: Colors.blue,
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            'Umidade: ${weatherData.humidity}%',
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'A sensação térmica em ${weatherData.cityName} é ${weatherData.feelslike}ºC',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  );
-                                }
+                          ),
+                          TextButton(
+                              style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.blue),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                                  valorTextField = _controller.text;
+                                });
                               },
-                            ),
-                          ],
-
-                          // container I
-                        ),
+                              child: Text('Buscar')),
+                          FutureBuilder<WeatherData>(
+                            future: fetchWeatherData(valorTextField),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return const Text(
+                                    'Erro ao carregar os dados da API');
+                              } else {
+                                var weatherData = snapshot.data!;
+                                var iconUrl =
+                                    'https://openweathermap.org/img/wn/${weatherData.icontmp}.png';
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.network(iconUrl),
+                                        Text(
+                                          '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.water_drop,
+                                          size: 24,
+                                          color: Colors.blue,
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'Umidade: ${weatherData.humidity}%',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'A sensação térmica em ${weatherData.cityName} é ${weatherData.feelslike}ºC',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                        // container I
                       ),
                       // PAGINA 3
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            '${valorTextField.toUpperCase()} - previsão do tempo detalhada',
-                            style: const TextStyle(
-                              fontSize: 21,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          const Text(
+                            'Confira a Previsão do Tempo Detalhada',
+                            style: TextStyle(
+                                fontSize: 21, fontWeight: FontWeight.bold),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 40.0, horizontal: 20.0),
-                            child: Text('Cidade $valorTextField'),
+                                vertical: 20.0, horizontal: 20.0),
+                            child: TextField(
+                              controller: _controller,
+                              onChanged: (value) {},
+                              decoration: const InputDecoration(
+                                hintText: 'Digite uma cidade...',
+                                icon: Icon(Icons.search),
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                              style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.blue),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                                  valorTextField = _controller.text;
+                                });
+                              },
+                              child: Text('Buscar')),
+                          FutureBuilder<WeatherData>(
+                            future: fetchWeatherData(valorTextField),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return const Text(
+                                    'Erro ao carregar os dados da API');
+                              } else {
+                                var weatherData = snapshot.data!;
+                                var iconUrl =
+                                    'https://openweathermap.org/img/wn/${weatherData.icontmp}.png';
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.network(iconUrl),
+                                        Text(
+                                          '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.water_drop,
+                                          size: 24,
+                                          color: Colors.blue,
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'Umidade: ${weatherData.humidity}%',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'A sensação térmica em ${weatherData.cityName} é ${weatherData.feelslike}ºC',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Pressão atmosférica: ${weatherData.pressure} Pa',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              }
+                            },
                           ),
                         ],
                       ),

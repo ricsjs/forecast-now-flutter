@@ -125,13 +125,25 @@ class _MyAppState extends State<MyApp> {
                       const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Page 1',
-                            style: TextStyle(
-                              fontSize: 21,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          Expanded(
+
+                                    child: Text("Esse projeto foi utilizado uma API para puxar informações detalhadas sobre tempo e o clima de uma região"),
+
+                                  ),
+
+                                  Expanded(
+
+                                    child: Text("Os integrantes para construção desse sistemas foram, Gabriel Lima, Leonardo Alves, Ricardo Alencar"),
+
+                                  ),
+
+                                  Expanded(
+
+                                    child: Text("Para utilizar esse sistema basta digitar o nome da cidade ou região que você mora e clicar em buscar para puxar as informações climaticas dessee local"),
+
+                                  )
+
+                                
                         ],
                       ),
                       Container(

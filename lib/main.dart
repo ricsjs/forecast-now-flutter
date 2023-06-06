@@ -51,7 +51,7 @@ Future<WeatherData> fetchWeatherData(String city) async {
         icontmp: data['weather'][0]['icon'],
         pressure: data['main']['pressure'],
         windspeed: data['wind']['speed'],
-        cloud: data ['clouds']['all']);
+        cloud: data['clouds']['all']);
   } else {
     throw Exception('Falha ao carregar os dados da API');
   }
@@ -156,7 +156,9 @@ class _MyAppState extends State<MyApp> {
                           const Text(
                             'Confira a Previsão do Tempo',
                             style: TextStyle(
-                                fontSize: 21, fontWeight: FontWeight.bold),
+                                fontSize: 21,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(40, 44, 52, 1)),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -165,24 +167,41 @@ class _MyAppState extends State<MyApp> {
                               controller: _controller,
                               onChanged: (value) {},
                               decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
                                 hintText: 'Digite uma cidade...',
-                                icon: Icon(Icons.search),
+                                icon: Icon(
+                                  Icons.search,
+                                  color: Color.fromRGBO(40, 44, 52, 1),
+                                ),
                               ),
                             ),
                           ),
-                          TextButton(
-                              style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.blue),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey), // Cor do fundo
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // Valor do raio para bordas arredondadas
+                                ),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  // Atualiza o valor da variável valorTextField com o valor atual do TextField
-                                  valorTextField = _controller.text;
-                                });
-                              },
-                              child: Text('Buscar')),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                                valorTextField = _controller.text;
+                              });
+                            },
+                            child: Text(
+                              'Buscar',
+                              style: TextStyle(
+                                color: Color.fromRGBO(
+                                    40, 44, 52, 1), // Cor do texto
+                              ),
+                            ),
+                          ),
                           FutureBuilder<WeatherData>(
                             future: fetchWeatherData(valorTextField),
                             builder: (context, snapshot) {
@@ -207,9 +226,10 @@ class _MyAppState extends State<MyApp> {
                                         Text(
                                           '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
                                           style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color.fromRGBO(
+                                                  40, 44, 52, 1)),
                                         ),
                                       ],
                                     ),
@@ -220,17 +240,19 @@ class _MyAppState extends State<MyApp> {
                                         Icon(
                                           Icons.water_drop,
                                           size: 24,
-                                          color: Colors.blue,
+                                          color: Color.fromRGBO(40, 44, 52, 1),
                                         ),
                                         SizedBox(width: 5),
                                         Text(
                                           'Umidade: ${weatherData.humidity}%',
                                           style: TextStyle(
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w500),
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromRGBO(
+                                                  40, 44, 52, 1)),
                                         ),
                                       ],
-                                    ),                                    
+                                    ),
                                   ],
                                 );
                               }
@@ -246,7 +268,9 @@ class _MyAppState extends State<MyApp> {
                           const Text(
                             'Previsão do Tempo Detalhada',
                             style: TextStyle(
-                                fontSize: 21, fontWeight: FontWeight.bold),
+                                fontSize: 21,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(40, 44, 52, 1)),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -255,24 +279,39 @@ class _MyAppState extends State<MyApp> {
                               controller: _controller,
                               onChanged: (value) {},
                               decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
                                 hintText: 'Digite uma cidade...',
-                                icon: Icon(Icons.search),
+                                icon: Icon(Icons.search,
+                                    color: Color.fromRGBO(40, 44, 52, 1)),
                               ),
                             ),
                           ),
-                          TextButton(
-                              style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.blue),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey), // Cor do fundo
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // Valor do raio para bordas arredondadas
+                                ),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  // Atualiza o valor da variável valorTextField com o valor atual do TextField
-                                  valorTextField = _controller.text;
-                                });
-                              },
-                              child: Text('Buscar')),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                                valorTextField = _controller.text;
+                              });
+                            },
+                            child: Text(
+                              'Buscar',
+                              style: TextStyle(
+                                color: Color.fromRGBO(
+                                    40, 44, 52, 1), // Cor do texto
+                              ),
+                            ),
+                          ),
                           FutureBuilder<WeatherData>(
                             future: fetchWeatherData(valorTextField),
                             builder: (context, snapshot) {
@@ -297,9 +336,10 @@ class _MyAppState extends State<MyApp> {
                                         Text(
                                           '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
                                           style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color.fromRGBO(
+                                                  40, 44, 52, 1)),
                                         ),
                                       ],
                                     ),
@@ -310,14 +350,16 @@ class _MyAppState extends State<MyApp> {
                                         Icon(
                                           Icons.water_drop,
                                           size: 24,
-                                          color: Colors.blue,
+                                          color: Color.fromRGBO(40, 44, 52, 1),
                                         ),
                                         SizedBox(width: 5),
                                         Text(
                                           'Umidade: ${weatherData.humidity}%',
                                           style: TextStyle(
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w500),
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromRGBO(
+                                                  40, 44, 52, 1)),
                                         ),
                                       ],
                                     ),
@@ -328,8 +370,9 @@ class _MyAppState extends State<MyApp> {
                                         Text(
                                           'A sensação térmica em ${weatherData.cityName} é ${weatherData.feelslike}ºC',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16),
+                                              fontSize: 16,
+                                              color: Color.fromRGBO(
+                                                  40, 44, 52, 1)),
                                         )
                                       ],
                                     ),
@@ -340,8 +383,9 @@ class _MyAppState extends State<MyApp> {
                                         Text(
                                           'Pressão atmosférica: ${weatherData.pressure} hPa',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16),
+                                              fontSize: 16,
+                                              color: Color.fromRGBO(
+                                                  40, 44, 52, 1)),
                                         )
                                       ],
                                     ),
@@ -352,8 +396,9 @@ class _MyAppState extends State<MyApp> {
                                         Text(
                                           'Velocidade do vento: ${weatherData.windspeed} m/s',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16),
+                                              fontSize: 16,
+                                              color: Color.fromRGBO(
+                                                  40, 44, 52, 1)),
                                         )
                                       ],
                                     ),
@@ -364,8 +409,9 @@ class _MyAppState extends State<MyApp> {
                                         Text(
                                           'Nuvens: ${weatherData.cloud} %',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16),
+                                              fontSize: 16,
+                                              color: Color.fromRGBO(
+                                                  40, 44, 52, 1)),
                                         )
                                       ],
                                     ),

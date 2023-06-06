@@ -194,7 +194,7 @@ class _MyAppState extends State<MyApp> {
                                 valorTextField = _controller.text;
                               });
                             },
-                            child: Text(
+                            child: const Text(
                               'Buscar',
                               style: TextStyle(
                                 color: Color.fromRGBO(
@@ -218,6 +218,7 @@ class _MyAppState extends State<MyApp> {
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
+                                    Text(''),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -237,7 +238,7 @@ class _MyAppState extends State<MyApp> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.water_drop,
                                           size: 24,
                                           color: Color.fromRGBO(40, 44, 52, 1),
@@ -245,7 +246,7 @@ class _MyAppState extends State<MyApp> {
                                         SizedBox(width: 5),
                                         Text(
                                           'Umidade: ${weatherData.humidity}%',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromRGBO(
@@ -304,7 +305,7 @@ class _MyAppState extends State<MyApp> {
                                 valorTextField = _controller.text;
                               });
                             },
-                            child: Text(
+                            child: const Text(
                               'Buscar',
                               style: TextStyle(
                                 color: Color.fromRGBO(
@@ -328,35 +329,17 @@ class _MyAppState extends State<MyApp> {
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
+                                    Text(''),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .center, 
                                       children: [
                                         Image.network(iconUrl),
+                                        const SizedBox(width: 10),
                                         Text(
-                                          '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
+                                          '${weatherData.cityName}, ${weatherData.temperature}ºC',
                                           style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: Color.fromRGBO(
-                                                  40, 44, 52, 1)),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.water_drop,
-                                          size: 24,
-                                          color: Color.fromRGBO(40, 44, 52, 1),
-                                        ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          'Umidade: ${weatherData.humidity}%',
-                                          style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromRGBO(
                                                   40, 44, 52, 1)),
@@ -365,12 +348,36 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.start,
                                       children: [
+                                        /*
+                                        const Icon(
+                                          Icons.water_drop,
+                                          size: 18,
+                                          color: Color.fromRGBO(40, 44, 52, 1),
+                                        ),
+                                        */
+                                        const SizedBox(width: 10),
                                         Text(
-                                          'A sensação térmica em ${weatherData.cityName} é ${weatherData.feelslike}ºC',
-                                          style: TextStyle(
-                                              fontSize: 16,
+                                          'Umidade: ${weatherData.humidity}%',
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromRGBO(
+                                                  40, 44, 52, 1)),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          'Sensação térmica: ${weatherData.feelslike}ºC',
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
                                               color: Color.fromRGBO(
                                                   40, 44, 52, 1)),
                                         )
@@ -378,12 +385,14 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.start,
                                       children: [
+                                        const SizedBox(width: 10),
                                         Text(
                                           'Pressão atmosférica: ${weatherData.pressure} hPa',
-                                          style: TextStyle(
-                                              fontSize: 16,
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
                                               color: Color.fromRGBO(
                                                   40, 44, 52, 1)),
                                         )
@@ -391,12 +400,14 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.start,
                                       children: [
+                                        const SizedBox(width: 10),
                                         Text(
                                           'Velocidade do vento: ${weatherData.windspeed} m/s',
-                                          style: TextStyle(
-                                              fontSize: 16,
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
                                               color: Color.fromRGBO(
                                                   40, 44, 52, 1)),
                                         )
@@ -404,12 +415,14 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.start,
                                       children: [
+                                        const SizedBox(width: 10),
                                         Text(
                                           'Nuvens: ${weatherData.cloud} %',
-                                          style: TextStyle(
-                                              fontSize: 16,
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
                                               color: Color.fromRGBO(
                                                   40, 44, 52, 1)),
                                         )

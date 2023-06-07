@@ -304,14 +304,14 @@ class _MyAppState extends State<MyApp> {
                                 // Atualiza o valor da variável valorTextField com o valor atual do TextField
                                 valorTextField = _controller.text;
                               });
-                            },
+                            },                            
                             child: const Text(
                               'Buscar',
                               style: TextStyle(
                                 color: Color.fromRGBO(
                                     40, 44, 52, 1), // Cor do texto
                               ),
-                            ),
+                            ),                            
                           ),
                           FutureBuilder<WeatherData>(
                             future: fetchWeatherData(valorTextField),
@@ -331,11 +331,10 @@ class _MyAppState extends State<MyApp> {
                                   children: [
                                     Text(''),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .center, 
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Image.network(iconUrl),
-                                        const SizedBox(width: 10),
                                         Text(
                                           '${weatherData.cityName}, ${weatherData.temperature}ºC',
                                           style: const TextStyle(
@@ -357,9 +356,14 @@ class _MyAppState extends State<MyApp> {
                                           color: Color.fromRGBO(40, 44, 52, 1),
                                         ),
                                         */
-                                        const SizedBox(width: 10),
+                                        const SizedBox(width: 45),
+                                        const Icon(
+                                          Icons.circle,
+                                          size: 8,
+                                          color: Color.fromRGBO(40, 44, 52, 1),
+                                        ),
                                         Text(
-                                          'Umidade: ${weatherData.humidity}%',
+                                          '\t Umidade: ${weatherData.humidity}%',
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
@@ -372,9 +376,14 @@ class _MyAppState extends State<MyApp> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        const SizedBox(width: 10),
+                                        const SizedBox(width: 45),
+                                        const Icon(
+                                          Icons.circle,
+                                          size: 8,
+                                          color: Color.fromRGBO(40, 44, 52, 1),
+                                        ),
                                         Text(
-                                          'Sensação térmica: ${weatherData.feelslike}ºC',
+                                          '\t Sensação térmica: ${weatherData.feelslike}ºC',
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
@@ -387,9 +396,14 @@ class _MyAppState extends State<MyApp> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        const SizedBox(width: 10),
+                                        const SizedBox(width: 45),
+                                        const Icon(
+                                          Icons.circle,
+                                          size: 8,
+                                          color: Color.fromRGBO(40, 44, 52, 1),
+                                        ),
                                         Text(
-                                          'Pressão atmosférica: ${weatherData.pressure} hPa',
+                                          '\t Pressão atmosférica: ${weatherData.pressure} hPa',
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
@@ -402,9 +416,14 @@ class _MyAppState extends State<MyApp> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        const SizedBox(width: 10),
+                                        const SizedBox(width: 45),
+                                        const Icon(
+                                          Icons.circle,
+                                          size: 8,
+                                          color: Color.fromRGBO(40, 44, 52, 1),
+                                        ),
                                         Text(
-                                          'Velocidade do vento: ${weatherData.windspeed} m/s',
+                                          '\t Velocidade do vento: ${weatherData.windspeed} m/s',
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
@@ -417,9 +436,14 @@ class _MyAppState extends State<MyApp> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        const SizedBox(width: 10),
+                                        const SizedBox(width: 45),
+                                        const Icon(
+                                          Icons.circle,
+                                          size: 8,
+                                          color: Color.fromRGBO(40, 44, 52, 1),
+                                        ),
                                         Text(
-                                          'Nuvens: ${weatherData.cloud} %',
+                                          '\t Nuvens: ${weatherData.cloud} %',
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,

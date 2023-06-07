@@ -5,6 +5,7 @@ import 'dart:convert';
 
 class WeatherData {
   final String cityName;
+  final String pais;
   final double temperature;
   final String weatherDescription;
   final double feelslike;
@@ -16,6 +17,7 @@ class WeatherData {
 
   WeatherData(
       {required this.cityName,
+      required this.pais,
       required this.temperature,
       required this.weatherDescription,
       required this.feelslike,
@@ -44,6 +46,7 @@ Future<WeatherData> fetchWeatherData(String city) async {
     var data = json.decode(response.body);
     return WeatherData(
         cityName: data['name'],
+        pais: data['sys']['country'],
         temperature: data['main']['temp'],
         weatherDescription: data['weather'][0]['description'],
         feelslike: data['main']['feels_like'],
@@ -77,7 +80,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    valorTextField = 'caico';
+    valorTextField = 'Caicó';
     _pageController = PageController(initialPage: _currentPage);
   }
 
@@ -109,14 +112,14 @@ class _MyAppState extends State<MyApp> {
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(217, 217, 217, 219),
+        backgroundColor: Color.fromARGB(255, 218, 218, 218),
         appBar: AppBar(title: const NewAppBar()),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Container(
-            height: 500,
+            height: 600,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Color.fromARGB(255, 255, 255, 255),
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Column(
@@ -156,7 +159,7 @@ class _MyAppState extends State<MyApp> {
                           const Text(
                             'Confira a Previsão do Tempo',
                             style: TextStyle(
-                                fontSize: 21,
+                                fontSize: 22,
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromRGBO(40, 44, 52, 1)),
                           ),
@@ -213,6 +216,17 @@ class _MyAppState extends State<MyApp> {
                                     'Erro ao carregar os dados da API');
                               } else {
                                 var weatherData = snapshot.data!;
+                                String breeze = "";
+                                if (weatherData.windspeed >= 1.6 &&
+                                    weatherData.windspeed <= 5.4) {
+                                  breeze = "brisa leve";
+                                } else if (weatherData.windspeed >= 5.5 &&
+                                    weatherData.windspeed <= 7.9) {
+                                  breeze = "brisa moderada";
+                                } else if (weatherData.windspeed >= 8 &&
+                                    weatherData.windspeed <= 10.7) {
+                                  breeze = "vento forte";
+                                }
                                 var iconUrl =
                                     'https://openweathermap.org/img/wn/${weatherData.icontmp}.png';
                                 return Column(
@@ -223,11 +237,11 @@ class _MyAppState extends State<MyApp> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Image.network(iconUrl),
+                                        // Image.network(iconUrl),
                                         Text(
-                                          '${weatherData.cityName}, ${weatherData.temperature}ºC, ${weatherData.weatherDescription}',
+                                          '${weatherData.cityName}, ${weatherData.pais}',
                                           style: const TextStyle(
-                                              fontSize: 16,
+                                              fontSize: 22,
                                               fontWeight: FontWeight.bold,
                                               color: Color.fromRGBO(
                                                   40, 44, 52, 1)),
@@ -238,22 +252,29 @@ class _MyAppState extends State<MyApp> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        const Icon(
-                                          Icons.water_drop,
-                                          size: 24,
-                                          color: Color.fromRGBO(40, 44, 52, 1),
-                                        ),
-                                        SizedBox(width: 5),
+                                        Image.network(iconUrl),
                                         Text(
-                                          'Umidade: ${weatherData.humidity}%',
+                                          '${weatherData.temperature}ºC',
                                           style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w600,
                                               color: Color.fromRGBO(
                                                   40, 44, 52, 1)),
-                                        ),
+                                        )
                                       ],
                                     ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Sensação térmica de ${weatherData.feelslike}ºC, $breeze, ${weatherData.weatherDescription}.',
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500),
+                                        )
+                                      ],
+                                    )
                                   ],
                                 );
                               }
@@ -304,14 +325,14 @@ class _MyAppState extends State<MyApp> {
                                 // Atualiza o valor da variável valorTextField com o valor atual do TextField
                                 valorTextField = _controller.text;
                               });
-                            },                            
+                            },
                             child: const Text(
                               'Buscar',
                               style: TextStyle(
                                 color: Color.fromRGBO(
                                     40, 44, 52, 1), // Cor do texto
                               ),
-                            ),                            
+                            ),
                           ),
                           FutureBuilder<WeatherData>(
                             future: fetchWeatherData(valorTextField),

@@ -369,7 +369,7 @@ class _MyAppState extends State<MyApp> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Sensação térmica de ${weatherData.feelslike}ºC, $breeze, ${weatherData.weatherDescription}.',
+                                    'Sensação térmica de ${weatherData.feelslike}ºC,\n $breeze, ${weatherData.weatherDescription}.',
                                     style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500),

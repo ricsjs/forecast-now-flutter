@@ -137,6 +137,7 @@ class _MyAppState extends State<MyApp> {
                   child : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(''),
                     Text(
                       'Informações de Software',
                       style: TextStyle(
@@ -252,6 +253,14 @@ class _MyAppState extends State<MyApp> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Padding(padding: 
+                    const EdgeInsets.symmetric(
+                      vertical: 30,
+                      horizontal: 20,
+                    ),
+                    child : Image.asset(                  
+                      'assets/images/nuvem.jpg',                      
+                      ),),
                     const Text(
                       'Confira a Previsão do Tempo',
                       style: TextStyle(

@@ -368,6 +368,10 @@ class _MyAppState extends State<MyApp> {
                                         fontSize: 22,
                                         fontWeight: FontWeight.w600,
                                         color: Color.fromRGBO(40, 44, 52, 1)),
+                                  ),
+                                  const SizedBox(
+                                    width: 35,
+                                    height: 35,
                                   )
                                 ],
                               ),

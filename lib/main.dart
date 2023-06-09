@@ -223,7 +223,7 @@ class _MyAppState extends State<MyApp> {
                                 'Data de lançamento',
                               ),
                               subtitle:Text(
-                                'beta',
+                                'Em produção',
                               ),
                           ),
                         ],
@@ -239,28 +239,12 @@ class _MyAppState extends State<MyApp> {
                                 'Requisitos do sistema',
                               ),
                               subtitle:Text(
-                                'beta',
+                                'Os aparelhos necessitam de conexão com o wifi',
                               ),
                           ),
                         ],
                       ),
-                    ),   
-                    Card(
-                      margin:EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ListTile(                              
-                              title: Text(
-                                'Logotipo',
-                              ),
-                              subtitle:Text(
-                                'beta',
-                              ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    ),                       
                   ],
                 ),
                 ),

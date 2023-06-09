@@ -140,260 +140,271 @@ class _MyAppState extends State<MyApp> {
                 ////////////////////// PÁGINA 1 //////////////////////////////
                 /////////////////////////////////////////////////////////////////
                 const SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(''),
-                      Text(
-                        'Informações de Software',
-                        style: TextStyle(
-                            fontSize: 21,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(40, 44, 52, 1)),
-                      ),
-                      Text(
-                        '',
-                      ),
-                      Card(
-                        margin: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            ListTile(
-                              title: Text(
-                                'Nome do software',
-                              ),
-                              subtitle: Text(
-                                'Forecast Now',
-                              ),
-                            ),
-                          ],
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 40.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Informações de Software',
+                          style: TextStyle(
+                              fontSize: 21,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(40, 44, 52, 1)),
                         ),
-                      ),
-                      Card(
-                        margin: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            ListTile(
-                              title: Text(
-                                'Versão do aplicativo',
-                              ),
-                              subtitle: Text(
-                                '1.0.0-beta',
-                              ),
-                            ),
-                          ],
+                        Text(
+                          '',
                         ),
-                      ),
-                      Card(
-                        margin: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            ListTile(
-                              title: Text(
-                                'Descrição do software',
+                        Card(
+                          margin: EdgeInsets.all(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ListTile(
+                                title: Text(
+                                  'Nome do software',
+                                ),
+                                subtitle: Text(
+                                  'Forecast Now',
+                                ),
                               ),
-                              subtitle: Text(
-                                'O Forecast Now é um app de previsão do tempo, seu software utiliza uma API de clima para buscar informações atualizadas sobre o tempo e as condições climáticas de uma determinada região.',
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Card(
-                        margin: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            ListTile(
-                              title: Text(
-                                'Desenvolvedores',
+                        Card(
+                          margin: EdgeInsets.all(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ListTile(
+                                title: Text(
+                                  'Versão do aplicativo',
+                                ),
+                                subtitle: Text(
+                                  '1.0.0-beta',
+                                ),
                               ),
-                              subtitle: Text(
-                                'Ricardo Alencar\nLeonardo Alves\nGabriel Lima',
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Card(
-                        margin: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            ListTile(
-                              title: Text(
-                                'Data de lançamento',
+                        Card(
+                          margin: EdgeInsets.all(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ListTile(
+                                title: Text(
+                                  'Descrição do software',
+                                ),
+                                subtitle: Text(
+                                  'O Forecast Now é um app de previsão do tempo, seu software utiliza uma API de clima para buscar informações atualizadas sobre o tempo e as condições climáticas de uma determinada região.',
+                                ),
                               ),
-                              subtitle: Text(
-                                'Em produção',
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Card(
-                        margin: EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            ListTile(
-                              title: Text(
-                                'Requisitos do sistema',
+                        Card(
+                          margin: EdgeInsets.all(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ListTile(
+                                title: Text(
+                                  'Desenvolvedores',
+                                ),
+                                subtitle: Text(
+                                  'Ricardo Alencar\nLeonardo Alves\nGabriel Lima',
+                                ),
                               ),
-                              subtitle: Text(
-                                'Os aparelhos necessitam de conexão com o wifi',
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        Card(
+                          margin: EdgeInsets.all(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ListTile(
+                                title: Text(
+                                  'Data de lançamento',
+                                ),
+                                subtitle: Text(
+                                  'Em produção',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Card(
+                          margin: EdgeInsets.all(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ListTile(
+                                title: Text(
+                                  'Requisitos do sistema',
+                                ),
+                                subtitle: Text(
+                                  'Os aparelhos necessitam de conexão com o wifi',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 //////////////////////////////////////////////////////////////
                 ////////////////////// PÁGINA 2 //////////////////////////////
                 /////////////////////////////////////////////////////////////////
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Confira a Previsão do Tempo',
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(40, 44, 52, 1)),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Padding(
+                SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 40.0, bottom: 40.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Confira a Previsão do Tempo',
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(40, 44, 52, 1)),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 30,
+                                horizontal: 20,
+                              ),
+                              child: Image.asset(
+                                'assets/images/nuvem.jpg',
+                              )),
+                        ),
+                        Padding(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 30,
-                            horizontal: 20,
-                          ),
-                          child: Image.asset(
-                            'assets/images/nuvem.jpg',
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 20.0),
-                      child: TextField(
-                        controller: _controller,
-                        onChanged: (value) {},
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Digite uma cidade...',
-                          icon: Icon(
-                            Icons.search,
-                            color: Color.fromRGBO(40, 44, 52, 1),
-                          ),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.grey), // Cor do fundo
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10.0), // Valor do raio para bordas arredondadas
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          // Atualiza o valor da variável valorTextField com o valor atual do TextField
-                          valorTextField = _controller.text;
-                        });
-                      },
-                      child: const Text(
-                        'Buscar',
-                        style: TextStyle(
-                          color: Color.fromRGBO(40, 44, 52, 1), // Cor do texto
-                        ),
-                      ),
-                    ),
-                    FutureBuilder<WeatherData>(
-                      future: fetchWeatherData(valorTextField),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          return const Text('Erro ao carregar os dados da API');
-                        } else {
-                          var weatherData = snapshot.data!;
-                          String breeze = "";
-                          if (weatherData.windspeed >= 1.6 &&
-                              weatherData.windspeed <= 5.4) {
-                            breeze = "brisa leve";
-                          } else if (weatherData.windspeed >= 5.5 &&
-                              weatherData.windspeed <= 7.9) {
-                            breeze = "brisa moderada";
-                          } else if (weatherData.windspeed >= 8 &&
-                              weatherData.windspeed <= 10.7) {
-                            breeze = "vento forte";
-                          }
-                          var iconUrl =
-                              'https://openweathermap.org/img/wn/${weatherData.icontmp}.png';
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(''),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // Image.network(iconUrl),
-                                  Text(
-                                    '${weatherData.cityName}, ${weatherData.pais}',
-                                    style: const TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(40, 44, 52, 1)),
-                                  ),
-                                ],
+                              vertical: 20.0, horizontal: 20.0),
+                          child: TextField(
+                            controller: _controller,
+                            onChanged: (value) {},
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Digite uma cidade...',
+                              icon: Icon(
+                                Icons.search,
+                                color: Color.fromRGBO(40, 44, 52, 1),
                               ),
-                              Row(
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.grey), // Cor do fundo
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10.0), // Valor do raio para bordas arredondadas
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                              valorTextField = _controller.text;
+                            });
+                          },
+                          child: const Text(
+                            'Buscar',
+                            style: TextStyle(
+                              color:
+                                  Color.fromRGBO(40, 44, 52, 1), // Cor do texto
+                            ),
+                          ),
+                        ),
+                        FutureBuilder<WeatherData>(
+                          future: fetchWeatherData(valorTextField),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            } else if (snapshot.hasError) {
+                              return const Text(
+                                  'Erro ao carregar os dados da API');
+                            } else {
+                              var weatherData = snapshot.data!;
+                              String breeze = "";
+                              if (weatherData.windspeed >= 1.6 &&
+                                  weatherData.windspeed <= 5.4) {
+                                breeze = "brisa leve";
+                              } else if (weatherData.windspeed >= 5.5 &&
+                                  weatherData.windspeed <= 7.9) {
+                                breeze = "brisa moderada";
+                              } else if (weatherData.windspeed >= 8 &&
+                                  weatherData.windspeed <= 10.7) {
+                                breeze = "vento forte";
+                              }
+                              var iconUrl =
+                                  'https://openweathermap.org/img/wn/${weatherData.icontmp}.png';
+                              return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image.network(iconUrl),
-                                  Text(
-                                    '${weatherData.temperature}ºC',
-                                    style: const TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color.fromRGBO(40, 44, 52, 1)),
+                                  Text(''),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      // Image.network(iconUrl),
+                                      Text(
+                                        '${weatherData.cityName}, ${weatherData.pais}',
+                                        style: const TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                            color:
+                                                Color.fromRGBO(40, 44, 52, 1)),
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(
-                                    width: 35,
-                                    height: 35,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.network(iconUrl),
+                                      Text(
+                                        '${weatherData.temperature}ºC',
+                                        style: const TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w600,
+                                            color:
+                                                Color.fromRGBO(40, 44, 52, 1)),
+                                      ),
+                                      const SizedBox(
+                                        width: 35,
+                                        height: 35,
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Sensação térmica de ${weatherData.feelslike}ºC,\n\t\t\t$breeze, ${weatherData.weatherDescription}.',
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      )
+                                    ],
                                   )
                                 ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Sensação térmica de ${weatherData.feelslike}ºC,\n\t\t\t$breeze, ${weatherData.weatherDescription}.',
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500),
-                                  )
-                                ],
-                              )
-                            ],
-                          );
-                        }
-                      },
-                    ),
-                  ],
+                              );
+                            }
+                          },
+                        ),
+                      ],
 
-                  // container I
+                      // container I
+                    ),
+                  ),
                 ),
                 //////////////////////////////////////////////////////////////
                 ////////////////////// PÁGINA 3 //////////////////////////////

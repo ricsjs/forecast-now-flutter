@@ -14,6 +14,8 @@ class WeatherData {
   final int pressure;
   final double windspeed;
   final int cloud;
+  final double min_temp;
+  final double max_temp;
 
   WeatherData(
       {required this.cityName,
@@ -25,7 +27,9 @@ class WeatherData {
       required this.icontmp,
       required this.pressure,
       required this.windspeed,
-      required this.cloud});
+      required this.cloud,
+      required this.min_temp,
+      required this.max_temp});
 }
 
 Future<WeatherData> fetchWeatherData(String city) async {
@@ -54,7 +58,9 @@ Future<WeatherData> fetchWeatherData(String city) async {
         icontmp: data['weather'][0]['icon'],
         pressure: data['main']['pressure'],
         windspeed: data['wind']['speed'],
-        cloud: data['clouds']['all']);
+        cloud: data['clouds']['all'],
+        min_temp: data['main']['temp_min'],
+        max_temp: data['main']['temp_max']);
   } else {
     throw Exception('Falha ao carregar os dados da API');
   }
@@ -134,117 +140,118 @@ class _MyAppState extends State<MyApp> {
                 ////////////////////// PÁGINA 1 //////////////////////////////
                 /////////////////////////////////////////////////////////////////
                 const SingleChildScrollView(
-                  child : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Informações de Software',
-                      style: TextStyle(
-                          fontSize: 21,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(40, 44, 52, 1)),
-                    ),
-                    Text(
-                      '',                      
-                    ),                                        
-                    Card(
-                      margin:EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ListTile(                              
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(''),
+                      Text(
+                        'Informações de Software',
+                        style: TextStyle(
+                            fontSize: 21,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(40, 44, 52, 1)),
+                      ),
+                      Text(
+                        '',
+                      ),
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ListTile(
                               title: Text(
                                 'Nome do software',
                               ),
-                              subtitle:Text(
+                              subtitle: Text(
                                 'Forecast Now',
                               ),
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Card(
-                      margin:EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ListTile(                              
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ListTile(
                               title: Text(
                                 'Versão do aplicativo',
                               ),
-                              subtitle:Text(
+                              subtitle: Text(
                                 '1.0.0-beta',
                               ),
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),    
-                    Card(
-                      margin:EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ListTile(                              
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ListTile(
                               title: Text(
                                 'Descrição do software',
                               ),
-                              subtitle:Text(
+                              subtitle: Text(
                                 'O Forecast Now é um app de previsão do tempo, seu software utiliza uma API de clima para buscar informações atualizadas sobre o tempo e as condições climáticas de uma determinada região.',
                               ),
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ), 
-                    Card(
-                      margin:EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ListTile(                              
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ListTile(
                               title: Text(
                                 'Desenvolvedores',
                               ),
-                              subtitle:Text(
+                              subtitle: Text(
                                 'Ricardo Alencar\nLeonardo Alves\nGabriel Lima',
                               ),
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),  
-                    Card(
-                      margin:EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ListTile(                              
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ListTile(
                               title: Text(
                                 'Data de lançamento',
                               ),
-                              subtitle:Text(
+                              subtitle: Text(
                                 'Em produção',
                               ),
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),     
-                    Card(
-                      margin:EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ListTile(                              
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ListTile(
                               title: Text(
                                 'Requisitos do sistema',
                               ),
-                              subtitle:Text(
+                              subtitle: Text(
                                 'Os aparelhos necessitam de conexão com o wifi',
                               ),
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),                       
-                  ],
-                ),
+                    ],
+                  ),
                 ),
                 //////////////////////////////////////////////////////////////
                 ////////////////////// PÁGINA 2 //////////////////////////////
@@ -258,6 +265,17 @@ class _MyAppState extends State<MyApp> {
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Color.fromRGBO(40, 44, 52, 1)),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 30,
+                            horizontal: 20,
+                          ),
+                          child: Image.asset(
+                            'assets/images/nuvem.jpg',
+                          )),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -350,6 +368,10 @@ class _MyAppState extends State<MyApp> {
                                         fontSize: 22,
                                         fontWeight: FontWeight.w600,
                                         color: Color.fromRGBO(40, 44, 52, 1)),
+                                  ),
+                                  const SizedBox(
+                                    width: 35,
+                                    height: 35,
                                   )
                                 ],
                               ),
@@ -357,7 +379,7 @@ class _MyAppState extends State<MyApp> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Sensação térmica de ${weatherData.feelslike}ºC, $breeze, ${weatherData.weatherDescription}.',
+                                    'Sensação térmica de ${weatherData.feelslike}ºC,\n\t\t\t$breeze, ${weatherData.weatherDescription}.',
                                     style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500),
@@ -461,7 +483,7 @@ class _MyAppState extends State<MyApp> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         subtitle: Text(
-                                            'Umidade: ${weatherData.humidity}%\nSensação térmica: ${weatherData.feelslike}ºC\nPressão atmosférica: ${weatherData.pressure}hPa\nVelocidade do vento: ${weatherData.windspeed}m/s\nNúvens: ${weatherData.cloud}%'),
+                                            'Umidade: ${weatherData.humidity}%\nTemperatura mínima: ${weatherData.min_temp}\nTemperatura máxima: ${weatherData.max_temp}\nSensação térmica: ${weatherData.feelslike}ºC\nPressão atmosférica: ${weatherData.pressure}hPa\nVelocidade do vento: ${weatherData.windspeed}m/s\nNúvens: ${weatherData.cloud}%'),
                                       ),
                                     ],
                                   ),

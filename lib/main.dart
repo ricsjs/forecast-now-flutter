@@ -130,16 +130,68 @@ class _MyAppState extends State<MyApp> {
                 });
               },
               children: [
-                // PÁGINA 1
+                //////////////////////////////////////////////////////////////
+                ////////////////////// PÁGINA 1 //////////////////////////////
+                /////////////////////////////////////////////////////////////////
                 const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                        "Esse projeto foi utilizado uma API para puxar informações detalhadas sobre tempo e o clima de uma região"),
+                      'Informações de Software',
+                      style: TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(40, 44, 52, 1)),
+                    ),
                     Text(
-                        "Os integrantes para construção desse sistemas foram, Gabriel Lima, Leonardo Alves, Ricardo Alencar"),
-                    Text(
-                        "Para utilizar esse sistema basta digitar o nome da cidade ou região que você mora e clicar em buscar para puxar as informações climaticas dessee local"),
+                      '',
+                    ),
+                    //Nome do software
+                    //Versão do software
+                    //Descrição do software
+                    //Desenvolvedores
+                    //Data de lançamento
+                    //Requisitos do sistema
+                    //Logotipo
+                    Card(
+                      color: Color.fromARGB(255, 225, 230, 234),
+                      shadowColor: Colors.blueGrey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ListTile(
+                              title: Text(
+                            'Versão: 1.0.0-beta',
+                          )),
+                        ],
+                      ),
+                    ),
+                    Card(
+                      color: Color.fromARGB(255, 225, 230, 234),
+                      shadowColor: Colors.blueGrey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ListTile(
+                              title: Text(
+                            'Os integrantes para construção desse sistemas foram, Gabriel Lima, Leonardo Alves, Ricardo Alencar',
+                          )),
+                        ],
+                      ),
+                    ),
+                    Card(
+                      color: Color.fromARGB(255, 225, 230, 234),
+                      shadowColor: Colors.blueGrey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ListTile(
+                              title: Text(
+                            'Para utilizar esse sistema basta digitar o nome da cidade ou região que você mora e clicar em buscar para puxar as informações climaticas dessee local',
+                          )),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
                 // PÁGINA 2

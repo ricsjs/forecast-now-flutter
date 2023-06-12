@@ -329,10 +329,19 @@ class _MyAppState extends State<MyApp> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
+                              return const Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                child: const CircularProgressIndicator(),
+                              );
                             } else if (snapshot.hasError) {
-                              return Text(
-                                  'Erro ao carregar os dados da API');
+                              return const Text(
+                                '\nErro ao carregar os dados da API',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17),
+                              );
                             } else {
                               var weatherData = snapshot.data!;
                               String breeze = "";

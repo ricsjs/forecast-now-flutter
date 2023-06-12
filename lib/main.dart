@@ -14,8 +14,8 @@ class WeatherData {
   final int pressure;
   final double windspeed;
   final int cloud;
-  final double min_temp;
-  final double max_temp;
+  final double mintemp;
+  final double maxtemp;
 
   WeatherData(
       {required this.cityName,
@@ -28,8 +28,8 @@ class WeatherData {
       required this.pressure,
       required this.windspeed,
       required this.cloud,
-      required this.min_temp,
-      required this.max_temp});
+      required this.mintemp,
+      required this.maxtemp});
 }
 
 Future<WeatherData> fetchWeatherData(String city) async {
@@ -59,8 +59,8 @@ Future<WeatherData> fetchWeatherData(String city) async {
         pressure: data['main']['pressure'],
         windspeed: data['wind']['speed'],
         cloud: data['clouds']['all'],
-        min_temp: data['main']['temp_min'],
-        max_temp: data['main']['temp_max']);
+        mintemp: data['main']['temp_min'],
+        maxtemp: data['main']['temp_max']);
   } else {
     throw Exception('Falha ao carregar os dados da API');
   }
@@ -329,10 +329,19 @@ class _MyAppState extends State<MyApp> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
+                              return const Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                child: const CircularProgressIndicator(),
+                              );
                             } else if (snapshot.hasError) {
                               return const Text(
-                                  'Erro ao carregar os dados da API');
+                                '\nErro ao carregar os dados da API',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17),
+                              );
                             } else {
                               var weatherData = snapshot.data!;
                               String breeze = "";
@@ -496,7 +505,7 @@ class _MyAppState extends State<MyApp> {
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           subtitle: Text(
-                                              'Umidade: ${weatherData.humidity}%\nTemperatura mínima: ${weatherData.min_temp}\nTemperatura máxima: ${weatherData.max_temp}\nSensação térmica: ${weatherData.feelslike}ºC\nPressão atmosférica: ${weatherData.pressure}hPa\nVelocidade do vento: ${weatherData.windspeed}m/s\nNúvens: ${weatherData.cloud}%'),
+                                              'Umidade: ${weatherData.humidity}%\nTemperatura mínima: ${weatherData.mintemp}\nTemperatura máxima: ${weatherData.maxtemp}\nSensação térmica: ${weatherData.feelslike}ºC\nPressão atmosférica: ${weatherData.pressure}hPa\nVelocidade do vento: ${weatherData.windspeed}m/s\nNúvens: ${weatherData.cloud}%'),
                                         ),
                                       ],
                                     ),

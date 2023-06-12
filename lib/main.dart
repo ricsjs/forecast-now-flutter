@@ -332,7 +332,7 @@ class _MyAppState extends State<MyApp> {
                               return const CircularProgressIndicator();
                             } else if (snapshot.hasError) {
                               return const Text(
-                                  'Erro ao carregar os dados da API');
+                                  '\nErro ao carregar os dados da API');
                             } else {
                               var weatherData = snapshot.data!;
                               String breeze = "";

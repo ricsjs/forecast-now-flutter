@@ -14,8 +14,8 @@ class WeatherData {
   final int pressure;
   final double windspeed;
   final int cloud;
-  final double min_temp;
-  final double max_temp;
+  final double mintemp;
+  final double maxtemp;
 
   WeatherData(
       {required this.cityName,
@@ -28,8 +28,8 @@ class WeatherData {
       required this.pressure,
       required this.windspeed,
       required this.cloud,
-      required this.min_temp,
-      required this.max_temp});
+      required this.mintemp,
+      required this.maxtemp});
 }
 
 Future<WeatherData> fetchWeatherData(String city) async {
@@ -46,7 +46,7 @@ Future<WeatherData> fetchWeatherData(String city) async {
   );
 
   var response = await http.get(previsaoSimplesUri);
-  if (response.statusCode == 200) {
+  if (200 == response.statusCode) {
     var data = json.decode(response.body);
     return WeatherData(
         cityName: data['name'],
@@ -331,7 +331,7 @@ class _MyAppState extends State<MyApp> {
                                 ConnectionState.waiting) {
                               return const CircularProgressIndicator();
                             } else if (snapshot.hasError) {
-                              return const Text(
+                              return Text(
                                   'Erro ao carregar os dados da API');
                             } else {
                               var weatherData = snapshot.data!;

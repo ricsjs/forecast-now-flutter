@@ -59,8 +59,8 @@ Future<WeatherData> fetchWeatherData(String city) async {
         pressure: data['main']['pressure'],
         windspeed: data['wind']['speed'],
         cloud: data['clouds']['all'],
-        min_temp: data['main']['temp_min'],
-        max_temp: data['main']['temp_max']);
+        mintemp: data['main']['temp_min'],
+        maxtemp: data['main']['temp_max']);
   } else {
     throw Exception('Falha ao carregar os dados da API');
   }
@@ -496,7 +496,7 @@ class _MyAppState extends State<MyApp> {
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           subtitle: Text(
-                                              'Umidade: ${weatherData.humidity}%\nTemperatura mínima: ${weatherData.min_temp}\nTemperatura máxima: ${weatherData.max_temp}\nSensação térmica: ${weatherData.feelslike}ºC\nPressão atmosférica: ${weatherData.pressure}hPa\nVelocidade do vento: ${weatherData.windspeed}m/s\nNúvens: ${weatherData.cloud}%'),
+                                              'Umidade: ${weatherData.humidity}%\nTemperatura mínima: ${weatherData.mintemp}\nTemperatura máxima: ${weatherData.maxtemp}\nSensação térmica: ${weatherData.feelslike}ºC\nPressão atmosférica: ${weatherData.pressure}hPa\nVelocidade do vento: ${weatherData.windspeed}m/s\nNúvens: ${weatherData.cloud}%'),
                                         ),
                                       ],
                                     ),

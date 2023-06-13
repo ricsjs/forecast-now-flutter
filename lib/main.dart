@@ -454,29 +454,32 @@ class _MyAppState extends State<MyApp> {
                             ),
                           ),
                         ),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.grey), // Cor do fundo
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    10.0), // Valor do raio para bordas arredondadas
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey), // Cor do fundo
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // Valor do raio para bordas arredondadas
+                                ),
                               ),
                             ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              // Atualiza o valor da variável valorTextField com o valor atual do TextField
-                              valorTextField = _controller.text;
-                            });
-                          },
-                          child: const Text(
-                            'Buscar',
-                            style: TextStyle(
-                              color:
-                                  Color.fromRGBO(40, 44, 52, 1), // Cor do texto
+                            onPressed: () {
+                              setState(() {
+                                // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                                valorTextField = _controller.text;
+                              });
+                            },
+                            child: const Text(
+                              'Buscar',
+                              style: TextStyle(
+                                color: Color.fromRGBO(
+                                    40, 44, 52, 1), // Cor do texto
+                              ),
                             ),
                           ),
                         ),
@@ -506,7 +509,7 @@ class _MyAppState extends State<MyApp> {
                                     margin: EdgeInsets.all(10),
                                     color: Colors.green[10],
                                     shadowColor: Colors.blueGrey,
-                                    elevation: 5,
+                                    elevation: 1,
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[

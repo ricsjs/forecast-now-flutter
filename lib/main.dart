@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
@@ -280,20 +282,23 @@ class _MyAppState extends State<MyApp> {
                               ),
                               child: Image.asset(
                                 'assets/images/nuvem.jpg',
+                                height: 150,
                               )),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20.0, horizontal: 20.0),
-                          child: TextField(
-                            controller: _controller,
-                            onChanged: (value) {},
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Digite uma cidade...',
-                              icon: Icon(
-                                Icons.search,
-                                color: Color.fromRGBO(40, 44, 52, 1),
+                          padding: const EdgeInsets.all(20),
+                          child: Container(
+                            width: 300,
+                            child: TextField(
+                              controller: _controller,
+                              onChanged: (value) {},
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'Digite uma cidade...',
+                                icon: Icon(
+                                  Icons.search,
+                                  color: Color.fromRGBO(40, 44, 52, 1),
+                                ),
                               ),
                             ),
                           ),
@@ -432,42 +437,49 @@ class _MyAppState extends State<MyApp> {
                               color: Color.fromRGBO(40, 44, 52, 1)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 40.0, horizontal: 20.0),
-                          child: TextField(
-                            controller: _controller,
-                            onChanged: (value) {},
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Digite uma cidade...',
-                              icon: Icon(Icons.search,
-                                  color: Color.fromRGBO(40, 44, 52, 1)),
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.grey), // Cor do fundo
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    10.0), // Valor do raio para bordas arredondadas
+                          padding: const EdgeInsets.all(20),
+                          child: Container(
+                            width: 300,
+                            child: TextField(
+                              controller: _controller,
+                              onChanged: (value) {},
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'Digite uma cidade...',
+                                icon: Icon(
+                                  Icons.search,
+                                  color: Color.fromRGBO(40, 44, 52, 1),
+                                ),
                               ),
                             ),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              // Atualiza o valor da variável valorTextField com o valor atual do TextField
-                              valorTextField = _controller.text;
-                            });
-                          },
-                          child: const Text(
-                            'Buscar',
-                            style: TextStyle(
-                              color:
-                                  Color.fromRGBO(40, 44, 52, 1), // Cor do texto
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey), // Cor do fundo
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // Valor do raio para bordas arredondadas
+                                ),
+                              ),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                // Atualiza o valor da variável valorTextField com o valor atual do TextField
+                                valorTextField = _controller.text;
+                              });
+                            },
+                            child: const Text(
+                              'Buscar',
+                              style: TextStyle(
+                                color: Color.fromRGBO(
+                                    40, 44, 52, 1), // Cor do texto
+                              ),
                             ),
                           ),
                         ),
@@ -479,7 +491,12 @@ class _MyAppState extends State<MyApp> {
                               return const CircularProgressIndicator();
                             } else if (snapshot.hasError) {
                               return const Text(
-                                  'Erro ao carregar os dados da API');
+                                'Erro ao carregar os dados da API',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600),
+                              );
                             } else {
                               var weatherData = snapshot.data!;
                               var iconUrl =
@@ -492,7 +509,7 @@ class _MyAppState extends State<MyApp> {
                                     margin: EdgeInsets.all(10),
                                     color: Colors.green[10],
                                     shadowColor: Colors.blueGrey,
-                                    elevation: 5,
+                                    elevation: 1,
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
